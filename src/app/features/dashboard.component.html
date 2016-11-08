@@ -1,11 +1,34 @@
 <section>
-	<h3> Welcome to the Dashboard {{user.name}}!</h3>
-	<form class="form-group" [formGroup]="form" (ngSubmit)="submitState()" autocomplete="off">
-		<div class="form-group">
-			<label for="password">Enter your name</label>
-			<input formControlName="name" id="password" [placeholder]="nameLabel">
-			<button class="btn btn-primary">Update store</button>
+	<!-- TIME, WEATHER, SERVER TEMP -->
+	<div class='row'>
+		<div class='col-md-4'>
+
+			<div class='widget widget-clock small-adjust'>
+				<div class='widget-body small'>
+					<div class="clock-wrapper">
+						<div class="clock-content">
+							<h1 id="date" class="date">{{currentDate}}</h1>
+							<h3 id="time" class="time">{{currentTime}}</h3>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-	</form>
-	<button class="btn btn-danger" (click)="logout()">Logout</button>
+		<div class='col-md-4'>
+			<!--<div>
+				<weather-widget></weather-widget>
+			</div>-->
+		</div>
+		<div class='col-md-4'>
+			<!--<div>
+				<server-sensor></server-sensor>
+			</div>-->
+		</div>
+	</div>
+	<!-- TIME, WEATHER, SERVER TEMP END -->
+
+
+
+
+
 </section>

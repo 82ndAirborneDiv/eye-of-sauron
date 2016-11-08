@@ -1,0 +1,99 @@
+.medium-adjust {
+	height: 317px;
+	
+}
+
+.overflow-adjust{
+	overflow-y: auto;
+}
+
+.small-adjust {
+	height:150px;
+  overflow-y: hidden;
+}
+
+
+.widget-warning {
+  background: #FF9100;
+  color:white;
+}
+
+.widget-clock{
+	background: #30426a;
+	color: white;
+}
+
+
+.center {
+  text-align: center;
+}
+
+.table {
+  color: #FFF;
+}
+
+.t-head {
+  background: #354962;
+}
+
+.square-it {
+	position: relative;
+	width: 50%;
+	overflow: hidden;
+}
+
+.square-it:before {
+	display: block;
+	padding-top: 100%;
+}
+
+.right {
+	text-align: right;
+}
+
+
+@-webkit-keyframes sk-circleBounceDelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  } 40% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes sk-circleBounceDelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  } 40% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+
+.clock-content {
+    width: 400px;
+    font-family: lato,sans-serif;
+    color: white;
+}
+
+.date, .time {
+    color: white;
+    font-weight: 300;
+    font-size: 1.5em;
+}
+
+.date {
+    margin-top: 2px;
+    font-size: 2.5em;
+    border-bottom: 2px solid #eee;
+}
+
+.time {
+    font-size: 3.5em;
+    text-align: right;
+    margin-bottom: 0px;
+    margin-top: 1px;
+}
