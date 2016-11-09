@@ -1,0 +1,31 @@
+{
+  "name": "labmonitor",
+  "version": "0.0.1",
+  "description": "Simple monitor for the IIU lab",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael Ta",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^2.1.2",
+    "colors": "^1.1.2",
+    "commander": "^2.9.0",
+    "concat-stream": "^1.5.2",
+    "connect-redis": "^3.1.0",
+    "debug": "^2.3.0",
+    "events": "^1.1.1",
+    "moment": "^2.15.2",
+    "path": "^0.12.7",
+    "redis": "^2.6.3",
+    "shortid": "^2.2.6",
+    "stream-spigot": "^3.0.5",
+    "timestream-aggregates": "^0.1.7",
+    "util": "^0.10.3",
+    "watchmen-ping-http-contains": "^0.0.2",
+    "watchmen-ping-http-head": "^0.2.0",
+    "watchmen-plugin-aws-ses": "0.0.1",
+    "watchmen-plugin-console": "0.2.0"
+  }
+}
