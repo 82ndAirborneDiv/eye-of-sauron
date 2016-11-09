@@ -1,7 +1,9 @@
 "use strict";
 const compression = require('compression')
 const express = require('express'),
-path = require('path');
+  path = require('path');
+
+const sensor = require('./api/pi-sensor');
 
 const E2E_PORT = require('./constants').E2E_PORT;
 const HOST = require('./constants').HOST;
@@ -17,6 +19,7 @@ const renderIndex = (req, res) => {
   res.sendFile(path.resolve(__dirname, 'dist/client/index.html'));
 }
 
+app.use('/api/sensor', sensor.getRoutes());
 app.get('/*', renderIndex);
 
 let e2e;
