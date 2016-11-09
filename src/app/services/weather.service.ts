@@ -33,7 +33,6 @@ export class WeatherService extends RequestBase {
     }
     var body = res.json();
     body = <WeatherReport>body;
-    // console.log(body);
     return body || {};
   }
 

@@ -5,7 +5,6 @@ import { Observable } from 'rxjs/Observable';
 
 import { AppState } from '../reducers';
 import { Store } from '@ngrx/store';
-// import { WeatherComponent } from './weather/weather.component';
 // import { UserActions } from '../user/user.actions';
 // import { User } from '../user/user.model';
 import { Site } from '../sites/site.model';
@@ -51,7 +50,7 @@ export class DashboardComponent implements OnDestroy, OnInit {
 
   getCurrentDate() {
     setInterval(() => {
-      var d = new Date();
+      let d = new Date();
 
       this.currentDate = this.monthNames[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
     },
@@ -60,13 +59,13 @@ export class DashboardComponent implements OnDestroy, OnInit {
 
   getCurrentTime() {
     setInterval(() => {
-      var time = new Date();
-      var hours = time.getHours();
-      var minutes = time.getMinutes();
-      var s = time.getSeconds();
+      let time = new Date();
+      let hours = time.getHours();
+      let minutes = time.getMinutes();
+      let s = time.getSeconds();
 
-      var ampm = hours <= 11 ? ' AM' : ' PM';
-      var strTime = [(hours === 12 ? "12" : hours % 12),
+      let ampm = hours <= 11 ? ' AM' : ' PM';
+      let strTime = [(hours === 12 ? "12" : hours % 12),
       (minutes < 10 ? "0" + minutes : minutes)
       ].join(':') + ampm;
 
