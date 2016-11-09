@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { AppState } from '../reducers';
 import { Store } from '@ngrx/store';
+// import { WeatherComponent } from './weather/weather.component';
 // import { UserActions } from '../user/user.actions';
 // import { User } from '../user/user.model';
 import { Site } from '../sites/site.model';

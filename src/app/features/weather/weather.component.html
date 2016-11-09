@@ -1,0 +1,9 @@
+<div *ngIf='weatherReport' class='widget widget-weather'>
+  <div class='widget-body small-adjust' [style.background-color]='setStyle()'>
+    <h3 class='title'>{{weatherReport.current_observation.display_location.city}}</h3>
+    <h1 class='right content'>{{weatherReport.current_observation.temp_f}}&deg;</h1>
+    <p class='right content'>
+      <img src='{{weatherReport.current_observation.icon_url}}' /> {{weatherReport.current_observation.weather}}
+    </p>
+  </div>
+</div>
