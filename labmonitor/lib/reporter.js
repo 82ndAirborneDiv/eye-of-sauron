@@ -1,6 +1,6 @@
 var moment = require('moment');
 var async = require('async');
-var auth = require('./../webserver/routes/web-auth-route');
+// var auth = require('./../webserver/routes/web-auth-route');
 var utils = require('./utils');
 var debug = require('debug')('reporter');
 

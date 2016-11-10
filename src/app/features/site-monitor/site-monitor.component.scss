@@ -1,0 +1,33 @@
+.widget-success{
+    background-image:
+	    linear-gradient(
+	      #1EBF4F, #1B903F
+	    );
+  color:#FFF;
+}
+
+.widget-danger {
+  background-image:
+	    linear-gradient(
+	      #FE4059, #B53041
+	    );
+  color:#FFF;
+}
+
+.widget-warn {
+  background-image:
+      linear-gradient(
+        #FFD54F, #FFC107
+      );
+  color:#000;
+}
+
+.center {
+  text-align: center;
+}
+
+.truncate{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

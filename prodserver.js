@@ -3,7 +3,9 @@ const compression = require('compression')
 const express = require('express'),
   path = require('path');
 
+const storeFactory = require('./labmonitor/lib/storage/storage-factory');
 const sensor = require('./api/pi-sensor');
+const report = require('./api/reports');
 
 const E2E_PORT = require('./constants').E2E_PORT;
 const HOST = require('./constants').HOST;
@@ -11,6 +13,11 @@ const PROD_PORT = require('./constants').PROD_PORT;
 
 const app = express();
 const ROOT = path.join(path.resolve(__dirname, '..'));
+
+let store = storeFactory.getStorageInstance('development');
+if (!store) {
+  console.error('Error creating storage for env');
+}
 
 app.use(compression());
 app.use(express.static('dist/client'));
@@ -20,6 +27,7 @@ const renderIndex = (req, res) => {
 }
 
 app.use('/api/sensor', sensor.getRoutes());
+app.use('/api/report', report.getRoutes(store));
 app.get('/*', renderIndex);
 
 let e2e;
