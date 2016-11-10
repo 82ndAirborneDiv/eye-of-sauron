@@ -12,9 +12,9 @@ exports.PROD_PORT = 8088;
  * For advanced configuration details, go to:
  * https://webpack.github.io/docs/webpack-dev-server.html#proxy
  */
-exports.USE_DEV_SERVER_PROXY = false;
+exports.USE_DEV_SERVER_PROXY = true;
 exports.DEV_SERVER_PROXY_CONFIG = {
-  '**': 'http://localhost:8089'
+  '**': 'http://localhost:8088'
 }
 
 /**
