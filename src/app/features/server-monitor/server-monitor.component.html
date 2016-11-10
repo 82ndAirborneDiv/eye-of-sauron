@@ -1,0 +1,7 @@
+<div class='widget widget-server'>
+  <div class='widget-body small-adjust' *ngIf='sensorData' [style.background-color]='setStyle()'>
+    <h3 class='title'>Server Room</h3>
+    <h1 class='right content temp'>{{sensorData.temperature | number: '2.1-1'}}&deg; </h1>
+    <p class='right content'>Humidity: {{sensorData.humidity}}%</p>
+  </div>
+</div>
