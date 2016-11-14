@@ -4,6 +4,7 @@ import { ServerMonitorComponent } from './features/server-monitor/server-monitor
 import { SiteMonitorComponent } from './features/site-monitor/site-monitor.component';
 import { NotFound404Component } from './not-found404.component';
 
+
 export const APP_DECLARATIONS = [
   DashboardComponent,
   WeatherComponent,
