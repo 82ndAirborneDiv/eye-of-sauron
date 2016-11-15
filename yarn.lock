@@ -3135,7 +3135,7 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
-ng2-sidebar@^1.6.2:
+ng2-sidebar:
   version "1.6.2"
   resolved "https://registry.yarnpkg.com/ng2-sidebar/-/ng2-sidebar-1.6.2.tgz#699aba54bfd58939408c8b41f6b8aad828180412"
 

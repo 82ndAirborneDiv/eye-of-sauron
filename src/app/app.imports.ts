@@ -14,7 +14,7 @@ import { rootReducer } from './reducers';
 import { StoreDevToolsModule } from './features/store-devtools.module';
 import { UserEffects } from './user/user.effects';
 
-// import { SidebarModule } from 'ng2-sidebar';
+import { SidebarModule } from 'ng2-sidebar';
 
 const STORE_DEV_TOOLS_IMPORTS = [];
 if (ENV === 'development' && !AOT &&
@@ -36,7 +36,7 @@ export const APP_IMPORTS = [
   RouterStoreModule.connectRouter(),
   StoreModule.provideStore(rootReducer),
   STORE_DEV_TOOLS_IMPORTS,
-  StoreDevToolsModule
-  // SidebarModule
+  StoreDevToolsModule,
+  SidebarModule
 ];
 
