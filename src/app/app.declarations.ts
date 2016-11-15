@@ -6,9 +6,9 @@ import { NotFound404Component } from './not-found404.component';
 
 
 export const APP_DECLARATIONS = [
-  DashboardComponent,
-  WeatherComponent,
-  ServerMonitorComponent,
-  SiteMonitorComponent,
-  NotFound404Component
+    DashboardComponent,
+    WeatherComponent,
+    ServerMonitorComponent,
+    SiteMonitorComponent,
+    NotFound404Component
 ];

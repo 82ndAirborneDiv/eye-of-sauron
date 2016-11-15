@@ -11,9 +11,9 @@
     float: left;
 }
 
-
 #my-app-title, #my-nav-menu{
-  float: left;
+  float: right;
+  color:white;
 }
 
 #my-nav-menu {
@@ -23,3 +23,64 @@
   }
 }
 
+.fa-bars {
+  color: white;
+}
+
+button {
+  background-color: transparent;
+  background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none
+}
+
+
+.sidebar {
+    background-color: grey;
+    width: 150px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    color:white;
+}
+
+.sidebar h1 {
+    color: white;
+}
+
+.dash {
+    position: absolute;
+    top: 0;
+    left: 150px;
+    right: 0;
+    bottom: 0;
+    
+    -moz-transition: left 0.5s ease;
+    transition: left 0.5s ease;
+}
+
+input[type=checkbox] {
+   display: none;
+}
+
+input:checked ~ .portfolio { 
+    left: 0;
+}
+
+input:checked ~ label {
+    left: 0;
+}
+
+label {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 150px;
+    background-color: blue;
+    
+    -moz-transition: left 0.5s ease;
+    transition: left 0.5s ease;
+}

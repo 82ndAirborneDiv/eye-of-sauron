@@ -19,7 +19,7 @@ export class WeatherComponent {
   ) { }
 
   ngOnInit() {
-    this.getCurrentWeather();
+    // this.getCurrentWeather(); temporarily deactivate to not use up all the hits whiles testing
   }
 
   ngAfterContentInit() {

@@ -214,12 +214,6 @@ amdefine@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.0.tgz#fd17474700cb5cc9c2b709f0be9d23ce3c198c33"
 
-angular2-moment:
-  version "1.0.0-beta.rc.1"
-  resolved "https://registry.yarnpkg.com/angular2-moment/-/angular2-moment-1.0.0-beta.rc.1.tgz#d69e5a0ccc39d80a4a91004aa5af04c5b48b2961"
-  dependencies:
-    moment "^2.16.0"
-
 angular2-router-loader@~0.3.2:
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/angular2-router-loader/-/angular2-router-loader-0.3.3.tgz#f40e500c744d4ddd311fe68a83b9fdf7173eb78b"
@@ -3105,7 +3099,7 @@ mkdirp@0.5.0:
   dependencies:
     minimist "0.0.8"
 
-moment@^2.16.0:
+moment:
   version "2.16.0"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.16.0.tgz#f38f2c97c9889b0ee18fc6cc392e1e443ad2da8e"
 

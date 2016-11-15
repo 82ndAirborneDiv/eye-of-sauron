@@ -4,10 +4,14 @@ export const views: Object[] = [
     link: ['']
   },
   {
+    name: 'Admin',
+    link: ['admin']
+  },
+  {
     name: 'Lazy',
     link: ['lazy']
   },
-    {
+  {
     name: 'Sync',
     link: ['sync']
   },

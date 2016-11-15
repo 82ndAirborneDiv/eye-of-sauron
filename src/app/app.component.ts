@@ -17,6 +17,12 @@ export class AppComponent {
   mobile = MOBILE;
   views = views;
 
+  private _open: boolean = false;
+
+  private _toggleSidebar() {
+    this._open = !this._open;
+  }
+
   constructor(
     public route: ActivatedRoute,
     public router: Router

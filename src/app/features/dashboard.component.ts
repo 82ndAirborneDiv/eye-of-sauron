@@ -7,7 +7,7 @@ import { AppState } from '../reducers';
 import { Store } from '@ngrx/store';
 // import { UserActions } from '../user/user.actions';
 // import { User } from '../user/user.model';
-import { Site } from '../sites/site.model';
+
 
 @Component({
   selector: 'my-dashboard',
@@ -54,7 +54,7 @@ export class DashboardComponent implements OnDestroy, OnInit {
 
       this.currentDate = this.monthNames[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
     },
-      1000)
+      50)
   }
 
   getCurrentTime() {
@@ -71,7 +71,7 @@ export class DashboardComponent implements OnDestroy, OnInit {
 
       this.currentTime = strTime;
     },
-      1000)
+      50)
   }
 
   submitState() {
