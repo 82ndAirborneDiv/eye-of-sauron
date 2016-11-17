@@ -22,6 +22,7 @@ import { Service, ServicesService } from '../../services/services.service';
 export class AdminComponent {
   errorMessage: string;
   services: Service[];
+  isNew = false;
 
   // services = SERVICES;
   selectedService: Service = null;
@@ -37,17 +38,43 @@ export class AdminComponent {
   }
 
   toggleAdd(): void {
+    this.isNew = true;
     this.selectedService = { id: '', name: '', url: '', timeout: 10000, port: 80, interval: 60000, failureInterval: 30000, warningThreshold: 30000, host: '', pingServiceName: 'http-head' };
   }
 
-  save(service): void {
-    this._serviceService.addService(service)
+  reset(id): void {
+    this._serviceService.reset(id)
       .subscribe(
       service => {
-        console.log(service);
+
       },
       error => this.errorMessage = <any>error
       )
+  }
+
+  save(service): void {
+    if (this.isNew) {
+      this._serviceService.addService(service)
+        .subscribe(
+        service => {
+          this.getServices();
+          this.selectedService = null;
+          this.isNew = false;
+        },
+        error => this.errorMessage = <any>error
+        )
+    } else {
+      this._serviceService.update(service.id, service)
+        .subscribe(
+        service => {
+          this.getServices();
+          this.selectedService = null;
+          this.isNew = false;
+        },
+        error => this.errorMessage = <any>error
+        )
+    }
+
   }
 
   delete(id): void {

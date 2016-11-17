@@ -47,9 +47,9 @@ export class ServicesService extends RequestBase {
       .catch(this.handleError);
   }
 
-  update(id) {
-    let url = '/api/sites/services' + id;
-    return this._http.post(url, this.options)
+  update(id, body) {
+    let url = '/api/sites/services/' + id;
+    return this._http.post(url, body, this.options)
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -61,7 +61,7 @@ export class ServicesService extends RequestBase {
   }
 
   getServicesById(id) {
-    let url = '/api/services/' + id
+    let url = '/api/services/' + id;
     return this._http.get(url, this.headers)
       .map((response: Response) => <Service[]>response.json())
       .catch(this.handleError);

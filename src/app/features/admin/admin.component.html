@@ -1,13 +1,13 @@
 <section>
   <div class="widget">
     <div class="widget-header">
-      <h4>Services</h4>
+      <h3>Services</h3>
     </div>
     <div class="widget-body">
       <div class="row">
         <div class="col-md-5 col-sm-6">
           <div class="service-list">
-            <h4>Active</h4>
+            <h3>Active</h3>
             <br>
             <ul class="services">
               <li *ngFor="let service of services" [class.selected]="service === selectedService" (click)="onSelect(service)">{{service.name}}</li>
@@ -18,7 +18,7 @@
         <div class="col-md-7 col-sm-6">
           <div *ngIf="selectedService || addNew">
             <!--<div class="container">-->
-            <h4>Edit Service</h4>
+            <h3>Edit Service</h3>
             <br>
             <fieldset>
 
@@ -71,12 +71,12 @@
             </fieldset>
             <!--</div>-->
             <button type="submit" class="btn btn-success confirm-buttons" (click)="save(selectedService)">Save</button>
-            <button type="submit" class="btn btn-warning confirm buttons">Reset</button>
+            <button type="submit" class="btn btn-warning confirm buttons" (click)="reset(selectedService.id)">Reset</button>
             <button type="submit" class="btn btn-danger confirm-buttons" (click)="delete(selectedService.id)">Delete</button>
-
           </div>
         </div>
       </div>
     </div>
   </div>
+
 </section>
