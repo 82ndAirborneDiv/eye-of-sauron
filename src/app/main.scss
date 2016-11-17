@@ -4,6 +4,12 @@
 
 //Global Styles
 
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
 #content-wrapper {
   padding-left: 0;
   margin-left: 0;
@@ -23,6 +29,7 @@
 #page-wrapper.open #sidebar-wrapper {
   left: 150px;
 }
+
 
 /**
  * Hamburg Menu

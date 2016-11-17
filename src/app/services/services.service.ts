@@ -14,7 +14,8 @@ export class Service {
     public timeout: number,
     public warningThreshold: number,
     public id: string,
-    public created: number
+    public host: string,
+    public pingServiceName: string
   ) { }
 }
 
@@ -27,13 +28,16 @@ export class ServicesService extends RequestBase {
   addService(hostBody) {
     let body = hostBody;
 
-    return this._http.post('/api/services', body, this.options)
+    return this._http.post('/api/sites/services', body, this.options)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
-  deleteService(serviceId) {
-    //TODO
+  delete(serviceId) {
+    let url = '/api/sites/services/' + serviceId;
+    return this._http.delete(url, this.options)
+      .map(this.extractData)
+      .catch(this.handleError);
   }
 
   getServices() {
@@ -44,7 +48,8 @@ export class ServicesService extends RequestBase {
   }
 
   getServicesById(id) {
-    return this._http.get('/api/services/:id', id)
+    let url = '/api/services/' + id
+    return this._http.get(url, this.headers)
       .map((response: Response) => <Service[]>response.json())
       // .do(Response => console.log(Response))
       .catch(this.handleError);

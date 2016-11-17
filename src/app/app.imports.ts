@@ -1,4 +1,4 @@
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 
 import { EffectsModule } from '@ngrx/effects';
@@ -18,25 +18,25 @@ import { SidebarModule } from 'ng2-sidebar';
 
 const STORE_DEV_TOOLS_IMPORTS = [];
 if (ENV === 'development' && !AOT &&
-  ['monitor', 'both'].includes(STORE_DEV_TOOLS) // set in constants.js file in project root
+    ['monitor', 'both'].includes(STORE_DEV_TOOLS) // set in constants.js file in project root
 ) STORE_DEV_TOOLS_IMPORTS.push(...[
-  StoreDevtoolsModule.instrumentStore({
-    monitor: useLogMonitor({
-      visible: true,
-      position: 'right'
+    StoreDevtoolsModule.instrumentStore({
+        monitor: useLogMonitor({
+            visible: true,
+            position: 'right'
+        })
     })
-  })
 ]);
 
 export const APP_IMPORTS = [
-  EffectsModule.run(UserEffects),
-  NgbModule.forRoot(),
-  ReactiveFormsModule,
-  RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
-  RouterStoreModule.connectRouter(),
-  StoreModule.provideStore(rootReducer),
-  STORE_DEV_TOOLS_IMPORTS,
-  StoreDevToolsModule,
-  SidebarModule
+    EffectsModule.run(UserEffects),
+    NgbModule.forRoot(),
+    FormsModule,
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+    RouterStoreModule.connectRouter(),
+    StoreModule.provideStore(rootReducer),
+    STORE_DEV_TOOLS_IMPORTS,
+    StoreDevToolsModule,
+    SidebarModule
 ];
 
