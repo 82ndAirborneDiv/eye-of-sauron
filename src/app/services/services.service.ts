@@ -33,9 +33,23 @@ export class ServicesService extends RequestBase {
       .catch(this.handleError);
   }
 
-  delete(serviceId) {
-    let url = '/api/sites/services/' + serviceId;
+  delete(id) {
+    let url = '/api/sites/services/' + id;
     return this._http.delete(url, this.options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  reset(id) {
+    let url = '/api/sites/services/' + id + '/reset';
+    return this._http.post(url, this.options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  update(id) {
+    let url = '/api/sites/services' + id;
+    return this._http.post(url, this.options)
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -43,7 +57,6 @@ export class ServicesService extends RequestBase {
   getServices() {
     return this._http.get('/api/sites/services')
       .map((response: Response) => <Service[]>response.json())
-      // .do(Response => console.log(Response))
       .catch(this.handleError);
   }
 
@@ -51,13 +64,12 @@ export class ServicesService extends RequestBase {
     let url = '/api/services/' + id
     return this._http.get(url, this.headers)
       .map((response: Response) => <Service[]>response.json())
-      // .do(Response => console.log(Response))
       .catch(this.handleError);
   }
 
   private extractData(res: Response) {
     let body = res.json();
-    console.log(body);
+    // console.log(body);
     return body || {};
   }
   private handleError(error: Response) {
