@@ -15,7 +15,8 @@ export class Service {
     public warningThreshold: number,
     public id: string,
     public host: string,
-    public pingServiceName: string
+    public pingServiceName: string,
+    public startMonitorTime: number
   ) { }
 }
 

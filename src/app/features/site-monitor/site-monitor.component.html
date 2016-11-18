@@ -5,7 +5,7 @@
   <div class='widget-body'>
     <div class='row'>
       <div class="col-lg-3 col-md-6 col-xs-12" *ngFor='let report of reports'>
-        <div *ngIf='!report.status.currentOutage' class='widget'>
+        <div *ngIf='!report.status.currentOutage.currentOutage' class='widget'>
           <div *ngIf="report.status.last24Hours.numberOutages < 1" class="widget-body widget-success">
             <div class='center'>
               <h4 class='truncate'><i class='fa fa-arrow-up'></i> {{report.service.name}}</h4>
@@ -21,7 +21,7 @@
             </div>
           </div>
         </div>
-        <div *ngIf='report.status.currentOutage' class='widget'>
+        <div *ngIf='report.status.currentOutage.currentOutage' class='widget'>
           <div class='widget-body widget-danger'>
             <div class='center'>
               <h4 class='truncate'><i class='fa fa-exclamation-triangle fa-lg'></i> {{report.service.name}} </h4>

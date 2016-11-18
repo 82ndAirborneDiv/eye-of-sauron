@@ -180,6 +180,19 @@ function getUptime(service, outages, currentOutage, since) {
   };
 }
 
+function getOutageDuration(service, currentOutage){
+	var now = +new Date();
+	var outageDuration = null;
+	
+	if(currentOutage) {
+		var outageStart = currentOutage.timestamp;
+		outageDuration = moment(outageStart).fromNow();
+		return outageDuration;
+	} else {
+		return outageDuration;
+	}
+}
+
 function getGeneralServiceInfo(service, storage, callback) {
 
   storage.getCurrentOutage(service, function (err, currentOutage) {
@@ -200,11 +213,17 @@ function getGeneralServiceInfo(service, storage, callback) {
         return outage.timestamp >= last24H;
       });
       var uptimeInfoLast24Hours = getUptime(service, outagesLast24Hours, currentOutage, last24H);
+      var outageDuration = getOutageDuration(service, currentOutage);
+      var upsince = moment(service.startMonitorTime).fromNow(true);
 
       return callback(null, {
         service: service,
         status: {
-          currentOutage: currentOutage,
+          upsince: upsince,
+          currentOutage: {
+            currentOutage: currentOutage,
+            outageDuration: outageDuration
+          },
           last24Hours: {
             outages: outagesLast24Hours,
             numberOutages: outagesLast24Hours.length,

@@ -24,6 +24,7 @@ export class AdminComponent {
   errorMessage: string;
   services: Service[];
   isNew = false;
+  startTime = +new Date();
 
   // services = SERVICES;
   selectedService: Service = null;
@@ -46,7 +47,7 @@ export class AdminComponent {
 
   toggleAdd(): void {
     this.isNew = true;
-    this.selectedService = { id: '', name: '', url: '', timeout: 10000, port: 80, interval: 60000, failureInterval: 30000, warningThreshold: 30000, host: '', pingServiceName: 'http-head' };
+    this.selectedService = { id: '', name: '', url: '', timeout: 10000, port: 80, interval: 60000, failureInterval: 30000, warningThreshold: 30000, host: '', pingServiceName: 'http-head', startMonitorTime: this.startTime };
   }
 
   reset(id): void {
