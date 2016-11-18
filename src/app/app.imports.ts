@@ -15,6 +15,7 @@ import { StoreDevToolsModule } from './features/store-devtools.module';
 import { UserEffects } from './user/user.effects';
 
 import { SidebarModule } from 'ng2-sidebar';
+import { ToastyModule } from 'ng2-toasty';
 
 const STORE_DEV_TOOLS_IMPORTS = [];
 if (ENV === 'development' && !AOT &&
@@ -37,6 +38,7 @@ export const APP_IMPORTS = [
     StoreModule.provideStore(rootReducer),
     STORE_DEV_TOOLS_IMPORTS,
     StoreDevToolsModule,
-    SidebarModule
+    SidebarModule,
+    ToastyModule.forRoot()
 ];
 

@@ -997,7 +997,7 @@ copy-webpack-plugin@~4.0.0:
     minimatch "^3.0.0"
     node-dir "^0.1.10"
 
-core-js@^2.2.0, core-js@2.4.1:
+core-js@^2.2.0, core-js@^2.4.1, core-js@2.4.1:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.4.1.tgz#4de911e667b0eae9124e34254b53aea6fc618d3e"
 
@@ -3139,6 +3139,15 @@ ng2-sidebar:
   version "1.6.2"
   resolved "https://registry.yarnpkg.com/ng2-sidebar/-/ng2-sidebar-1.6.2.tgz#699aba54bfd58939408c8b41f6b8aad828180412"
 
+ng2-toasty:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/ng2-toasty/-/ng2-toasty-2.1.0.tgz#394dee68785b6b8cbfa7fad6b5f0fc75b2231d7d"
+  dependencies:
+    core-js "^2.4.1"
+    reflect-metadata "^0.1.3"
+    rxjs "5.0.0-beta.12"
+    zone.js "^0.6.23"
+
 ngrx-store-freeze@0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/ngrx-store-freeze/-/ngrx-store-freeze-0.1.4.tgz#7994ad26878a503603606b9eb25ccdb61269750f"
@@ -4094,7 +4103,7 @@ reduce-function-call@^1.0.1:
   dependencies:
     balanced-match "~0.1.0"
 
-reflect-metadata@^0.1.2:
+reflect-metadata@^0.1.2, reflect-metadata@^0.1.3:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.8.tgz#72426d570b60776e3688968bd5ab9537a15cecf6"
 
@@ -5316,7 +5325,7 @@ yn@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/yn/-/yn-1.2.0.tgz#d237a4c533f279b2b89d3acac2db4b8c795e4a63"
 
-zone.js@0.6.26:
+zone.js@^0.6.23, zone.js@0.6.26:
   version "0.6.26"
   resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.6.26.tgz#067c13b8b80223a89b62e9dc82680f09762c4636"
 

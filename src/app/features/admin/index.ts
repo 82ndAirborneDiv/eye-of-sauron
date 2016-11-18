@@ -9,6 +9,7 @@ import { AdminComponent } from './admin.component';
 import { ServicesService } from '../../services/services.service';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastyModule } from 'ng2-toasty';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     // BrowserModule,
     FormsModule,
     RouterModule.forChild(routes),
-    NgbModule
+    NgbModule,
+    ToastyModule
   ],
   declarations: [
     AdminComponent

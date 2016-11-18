@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Service, ServicesService } from '../../services/services.service';
+import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty';
 
 // const SERVICES: Service[] = [
 //   { id: '11', name: 'IIU', url: 'http://www.phiresearchlab.org', timeout: 10000, port: 80, interval: 60000, failureInterval: 30000, warningThreshold: 30000, host: 'IIU', pingServiceName: 'http-head' },
@@ -27,7 +28,13 @@ export class AdminComponent {
   // services = SERVICES;
   selectedService: Service = null;
 
-  constructor(private _serviceService: ServicesService) { }
+  constructor(
+    private _serviceService: ServicesService,
+    private _toastyService: ToastyService,
+    private _toastyConfig: ToastyConfig
+  ) {
+    this._toastyConfig.theme = 'material';
+  }
 
   ngOnInit() {
     this.getServices();
@@ -46,7 +53,7 @@ export class AdminComponent {
     this._serviceService.reset(id)
       .subscribe(
       service => {
-
+        this._toastyService.info('Service Status Reset');
       },
       error => this.errorMessage = <any>error
       )
@@ -58,6 +65,7 @@ export class AdminComponent {
         .subscribe(
         service => {
           this.getServices();
+          this._toastyService.success('Added Service!');
           this.selectedService = null;
           this.isNew = false;
         },
@@ -68,6 +76,7 @@ export class AdminComponent {
         .subscribe(
         service => {
           this.getServices();
+          this._toastyService.success('Updated Service');
           this.selectedService = null;
           this.isNew = false;
         },
@@ -81,6 +90,7 @@ export class AdminComponent {
     this._serviceService.delete(id)
       .subscribe(
       service => {
+        this._toastyService.error('Deleted Service');
         this.services = this.services.filter(s => s.id !== service.id);
         if (this.selectedService.id === service.id) {
           this.selectedService = null;
