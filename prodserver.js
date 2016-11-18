@@ -7,6 +7,7 @@ const storeFactory = require('./labmonitor/lib/storage/storage-factory');
 const sensor = require('./api/pi-sensor');
 const report = require('./api/reports');
 const services = require('./api/services');
+const jira = require('./api/jira');
 const bodyParser = require('body-parser');
 
 const E2E_PORT = require('./constants').E2E_PORT;
@@ -33,6 +34,7 @@ const renderIndex = (req, res) => {
 app.use('/api/sensor', sensor.getRoutes());
 app.use('/api/report', report.getRoutes(store));
 app.use('/api/sites', services.getRoutes(store));
+app.use('/api/jira', jira.getRoutes());
 app.get('/*', renderIndex);
 
 let e2e;

@@ -1,0 +1,29 @@
+<div class='widget'>
+  <div class='widget-header'>
+    Open Service Desk Tickets
+  </div>
+  <div class='widget-body medium-adjust overflow-adjust'>
+    <div class='table-responsive'>
+      <table class='table'>
+        <thead>
+          <tr class='t-head'>
+            <th class='text-center'>Key</th>
+            <th>Summary</th>
+            <th>Assignee</th>
+            <th>Creator</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let unresolved of unresolvedList'>
+            <td>{{unresolved.key}}</td>
+            <td>{{unresolved.summary}}</td>
+            <td>{{unresolved.assignee}}</td>
+            <td>{{unresolved.creator}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+component
