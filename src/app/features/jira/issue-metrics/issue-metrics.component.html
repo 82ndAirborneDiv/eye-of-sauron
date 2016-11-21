@@ -1,0 +1,9 @@
+<div class='widget'>
+  <div class='widget-header'>
+    Service Desk Tickets
+  </div>
+  <div class='widget-body medium-adjust'>
+    <base-chart class="chart" *ngIf='issues' [data]="issues" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)"
+      (chartClick)="chartClicked($event)" [options]="options"></base-chart>
+  </div>
+</div>
