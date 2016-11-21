@@ -38,7 +38,7 @@ export class JiraService extends RequestBase {
     if (res.status < 200 || res.status >= 300) {
       throw new Error('Bad response status: ' + res.status);
     }
-    console.log(res);
+    // console.log(res);
     var body = res.json();
     // console.log(body);
     return body || {};
