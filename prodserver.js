@@ -60,7 +60,7 @@ if (environment === 'production') {
         rejectUnauthorized: false,
     };
     https.createServer(options, app).listen(`${PORT}`);
-    console.log('HTTPS Express server listening on port ' + httpsPort);
+    console.log('HTTPS Express server listening on port ' + `${PORT}`);
 
 
     http.createServer((req, res) => {
