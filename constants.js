@@ -8,8 +8,8 @@ exports.E2E_PORT = 4201;
 exports.PROD_PORT = 3000;
 exports.HTTP_PORT = 4400;
 
-exports.SSL_CERT = '/sec/ssl/server_cert.pem';
-exports.SSL_KEY = '/sec/ssl/server_key.pem';
+exports.SSL_CERT = '/sec/ssl/server-cert.pem';
+exports.SSL_KEY = '/sec/ssl/server-key.pem';
 exports.SSL_BUNDLE = '/sec/ssl/gd_bundle-g2.crt';
 /**
  * These constants set whether or not you will use proxy for Webpack DevServer

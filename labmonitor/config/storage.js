@@ -17,7 +17,7 @@ module.exports = {
       'redis': {
         port: process.env.WATCHMEN_REDIS_PORT_DEVELOPMENT || 6379,
         host: process.env.WATCHMEN_REDIS_ADDR_DEVELOPMENT || '127.0.0.1',
-        db: process.env.WATCHMEN_REDIS_DB_DEVELOPMENT || 9
+        db: process.env.WATCHMEN_REDIS_DB_DEVELOPMENT || 2
       }
     }
   },
