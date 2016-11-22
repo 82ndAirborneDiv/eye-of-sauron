@@ -44,7 +44,7 @@
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label" for="host">Host</label>
                   <div class="col-md-9">
-                    <input class="form-control" type="text" id="host" [(ngModel)]="selectedService.host" name="host">
+                    <input class="form-control" type="text" id="host" [(ngModel)]="selectedService.host" name="host" required>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -67,12 +67,16 @@
                   </div>
                 </div>
 
+                <div class="form-group">
+                  <button type="submit" class="btn btn-success confirm-buttons" (click)="save(selectedService)">Save</button>
+                  <button *ngIf="!isNew" type="submit" class="btn btn-warning confirm buttons" (click)="reset(selectedService.id)">Reset</button>
+                  <button *ngIf="!isNew" type="submit" class="btn btn-danger confirm-buttons" (click)="delete(selectedService.id)">Delete</button>
+                </div>
+
               </form>
             </fieldset>
             <!--</div>-->
-            <button type="submit" class="btn btn-success confirm-buttons" (click)="save(selectedService)">Save</button>
-            <button type="submit" class="btn btn-warning confirm buttons" (click)="reset(selectedService.id)">Reset</button>
-            <button type="submit" class="btn btn-danger confirm-buttons" (click)="delete(selectedService.id)">Delete</button>
+
           </div>
         </div>
       </div>
