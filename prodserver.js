@@ -14,7 +14,7 @@ const http = require('http');
 const E2E_PORT = require('./constants').E2E_PORT;
 const HOST = require('./constants').HOST;
 const PROD_PORT = require('./constants').PROD_PORT;
-const HTTP_PORT = require('./constants').HTTP_PORT;
+const HTTPS_PORT = require('./constants').HTTP_PORT;
 const SSL_KEY = require('./constants').SSL_KEY;
 const SSL_CERT = require('./constants').SSL_CERT;
 const SSL_BUNDLE = require('./constants').SSL_BUNDLE;
@@ -49,7 +49,7 @@ if (ENV === 'e2e:server') { e2e = E2E_PORT };
 
 
 if (environment === 'production') {
-    const PORT = HTTP_PORT;
+    const PORT = HTTPS_PORT;
     let https = require('https'),      // module for https
         fs = require('fs');         // required to read certs and keys
     let options = {
@@ -67,7 +67,7 @@ if (environment === 'production') {
         res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
         //res.writeHead(301, { "Location": "https://localhost:4400" });
         res.end();
-    }).listen(`${PORT}`);
+    }).listen(PROD_PORT);
 } else {
     const PORT = e2e || PROD_PORT;
     app.listen(PORT, () => {
