@@ -3,10 +3,14 @@ const root = require('./helpers.js').root
 const ip = require('ip');
 
 exports.HOST = ip.address();
-exports.DEV_PORT = 3000;
+exports.DEV_PORT = 3001;
 exports.E2E_PORT = 4201;
-exports.PROD_PORT = 8088;
+exports.PROD_PORT = 3000;
+exports.HTTP_PORT = 4400;
 
+exports.SSL_CERT = '/path/to/server_cert.pem';
+exports.SSL_KEY = '/path/to/server_key.pem';
+exports.SSL_BUNDLE = '/path/to/gd_bundle-g2.crt';
 /**
  * These constants set whether or not you will use proxy for Webpack DevServer
  * For advanced configuration details, go to:
