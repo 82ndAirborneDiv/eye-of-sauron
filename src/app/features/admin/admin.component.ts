@@ -50,6 +50,10 @@ export class AdminComponent {
     this.selectedService = { id: '', name: '', url: '', timeout: 10000, port: 80, interval: 60000, failureInterval: 30000, warningThreshold: 30000, host: '', pingServiceName: 'http-head', startMonitorTime: this.startTime };
   }
 
+  toggleEdit(): void {
+    this.isNew = false;
+  }
+
   reset(id): void {
     this._serviceService.reset(id)
       .subscribe(

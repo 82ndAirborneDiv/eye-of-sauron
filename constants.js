@@ -18,7 +18,7 @@ exports.SSL_BUNDLE = '/path/to/gd_bundle-g2.crt';
  */
 exports.USE_DEV_SERVER_PROXY = true;
 exports.DEV_SERVER_PROXY_CONFIG = {
-    '**': 'http://localhost:8088'
+    '**': 'http://localhost:3000'
 }
 
 /**

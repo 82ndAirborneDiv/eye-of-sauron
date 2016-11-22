@@ -10,7 +10,7 @@
             <h3>Active</h3>
             <br>
             <ul class="services">
-              <li *ngFor="let service of services" [class.selected]="service === selectedService" (click)="onSelect(service)">{{service.name}}</li>
+              <li *ngFor="let service of services" [class.selected]="service === selectedService" (click)="onSelect(service); toggleEdit()">{{service.name}}</li>
             </ul>
             <button class="btn btn-primary confirm-buttons" (click)="toggleAdd()">Add</button>
           </div>
