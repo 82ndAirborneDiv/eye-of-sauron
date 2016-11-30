@@ -132,7 +132,6 @@ WatchMen.prototype.ping = function (params, callback) {
           }
 
           debug('latency was', elapsedTime);
-
           storage.archiveCurrentOutageIfExists(service, function (err, currentOutage) {
             if (err) {
               return callback(err);
@@ -141,9 +140,17 @@ WatchMen.prototype.ping = function (params, callback) {
             if (currentOutage) {
               debug('emit current outage');
               self.emit('service-back', service, currentOutage);
+              service.startMonitorTime = +new Date();
+              storage.updateService(service, function(err, updatedService) {
+                if (err) {
+                  return callback(err);
+                }
+                callback(null, service);
+              })
             }
 
             self.emit('service-ok', service, { elapsedTime: elapsedTime });
+
 
             callback(null, service.interval);
           });
