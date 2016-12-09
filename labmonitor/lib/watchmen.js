@@ -1,6 +1,7 @@
 var events = require('events');
 var moment = require('moment');
 var debug = require('debug')('watchmen');
+var mailer = require('./mailer')();
 var util = require('util');
 var utils = require('./utils');
 
@@ -53,7 +54,7 @@ WatchMen.prototype.ping = function (params, callback) {
 
       debug('error', error);
 
-      var nPingsToBeConsideredOutage = isNaN(service.failuresToBeOutage) ? 15 : service.failuresToBeOutage;
+      var nPingsToBeConsideredOutage = isNaN(service.failuresToBeOutage) ? 1 : service.failuresToBeOutage;
 
       debug('failure threshold', nPingsToBeConsideredOutage);
 
@@ -90,6 +91,8 @@ WatchMen.prototype.ping = function (params, callback) {
                   return callback(err);
                 }
                 self.emit('new-outage', service, outageData);
+                // console.log('Service Data: ', service);
+                mailer.sendDownEmail(service, outageData);
                 callback(null, service.failureInterval);
               });
             } else {
@@ -141,7 +144,8 @@ WatchMen.prototype.ping = function (params, callback) {
               debug('emit current outage');
               self.emit('service-back', service, currentOutage);
               service.startMonitorTime = +new Date();
-              storage.updateService(service, function(err, updatedService) {
+              mailer.sendUpEmail(service);
+              storage.updateService(service, function (err, updatedService) {
                 if (err) {
                   return callback(err);
                 }
