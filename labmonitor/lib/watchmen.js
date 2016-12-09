@@ -54,7 +54,7 @@ WatchMen.prototype.ping = function (params, callback) {
 
       debug('error', error);
 
-      var nPingsToBeConsideredOutage = isNaN(service.failuresToBeOutage) ? 1 : service.failuresToBeOutage;
+      var nPingsToBeConsideredOutage = isNaN(service.failuresToBeOutage) ? 15 : service.failuresToBeOutage;
 
       debug('failure threshold', nPingsToBeConsideredOutage);
 
