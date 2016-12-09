@@ -17,8 +17,8 @@ module.exports = function () {
     }
   };
 
-  const senderEmail = 'postmaster@sandbox6794d726b626405582a716f4bc6aa923.mailgun.org';
-  const emailRecipientList = [];
+  const senderEmail = '"Sauron" <eyeofsauron@sandbox6794d726b626405582a716f4bc6aa923.mailgun.org>';
+  const emailRecipientList = ['technical.ta@gmail.com', 'tgsavel@gmail.com'];
 
   const nodemailerMailgun = nodemailer.createTransport(mg(auth));
 
@@ -33,7 +33,7 @@ module.exports = function () {
     let downAt = moment(outageData.timestamp).format('MMMM Do YYYY, h:mm:ss a');
 
     let sendDownNotification = nodemailerMailgun.templateSender({
-      subject: '{{service}} is down!',
+      subject: '{{service}} is down! (TEST)',
       text: 'This is a notification that <b>{{service}}</b> is currently down. Please monitor Sauron for more details',
       html: '<p><b>{{service}}</b> (<a href="{{serviceUrl}}">{{serviceUrl}})</a> has gone down on <b>{{downAt}}</b>.</p> <p> Please monitor <a href="{{sauron}}">Sauron</a> for more details.</p>'
     }, {
@@ -42,7 +42,7 @@ module.exports = function () {
     );
 
     sendDownNotification({
-      to: 'technical.ta@gmail.com'
+      to: emailRecipientList
     }, {
         service: service.name,
         serviceUrl: service.url,
@@ -62,7 +62,7 @@ module.exports = function () {
   function sendUpEmail(service, upAt) {
 
     let sendUpNotification = nodemailerMailgun.templateSender({
-      subject: '{{service}} is back up!',
+      subject: '{{service}} is back up! (TEST)',
       text: '{{service}}is now back up!',
       html: '<p><b>{{service}}</b> (<a href="{{serviceUrl}}">{{serviceUrl}})</a> is now back up!</p>'
     }, {
@@ -71,7 +71,7 @@ module.exports = function () {
     );
 
     sendUpNotification({
-      to: 'technical.ta@gmail.com'
+      to: emailRecipientList
     }, {
         service: service.name,
         serviceUrl: service.url
