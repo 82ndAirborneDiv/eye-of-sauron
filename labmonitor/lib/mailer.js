@@ -18,7 +18,8 @@ module.exports = function () {
   };
 
   const senderEmail = '"Sauron" <eyeofsauron@sandbox6794d726b626405582a716f4bc6aa923.mailgun.org>';
-  const emailRecipientList = ['technical.ta@gmail.com', 'tgsavel@gmail.com'];
+  // const emailRecipientList = ['technical.ta@gmail.com', 'tgsavel@gmail.com'];
+  const emailRecipientList = 'technical.ta@gmail.com';
 
   const nodemailerMailgun = nodemailer.createTransport(mg(auth));
 
@@ -30,12 +31,15 @@ module.exports = function () {
 
   function sendDownEmail(service, outageData) {
 
-    let downAt = moment(outageData.timestamp).format('MMMM Do YYYY, h:mm:ss a');
+    // let downAt = moment(outageData.timestamp).format('MMMM Do YYYY, h:mm:ss a');
+    let errorType = outageData
 
     let sendDownNotification = nodemailerMailgun.templateSender({
       subject: '{{service}} is down! (TEST)',
       text: 'This is a notification that <b>{{service}}</b> is currently down. Please monitor Sauron for more details',
-      html: '<p><b>{{service}}</b> (<a href="{{serviceUrl}}">{{serviceUrl}})</a> has gone down on <b>{{downAt}}</b>.</p> <p> Please monitor <a href="{{sauron}}">Sauron</a> for more details.</p>'
+      html: `<p><b>{{service}}</b> (<a href="{{serviceUrl}}">{{serviceUrl}})</a> has gone down on <b>{{downAt}}</b>.</p> 
+            <p>{{errorType}}</p>
+            <p> Please monitor <a href="{{sauron}}">Sauron</a> for more details.</p>`
     }, {
         from: senderEmail
       }
@@ -46,7 +50,8 @@ module.exports = function () {
     }, {
         service: service.name,
         serviceUrl: service.url,
-        downAt: downAt,
+        downAt: moment(outageData.timestamp).format('MMMM Do YYYY, h:mm:ss a'),
+        errorType: outageData.error,
         sauron: 'https://sauron.phiresearchlab.org/'
       }, (err, info) => {
         if (err) {
