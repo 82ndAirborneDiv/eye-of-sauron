@@ -1,27 +1,30 @@
 const nodemailer = require('nodemailer');
-const mg = require('nodemailer-mailgun-transport');
+const sesTransport = require('nodemailer-ses-transport');
 const htmlToText = require('nodemailer-html-to-text').htmlToText;
 const moment = require('moment');
+
+const AWSKEYID = require('../../constants').AWSKEYID;
+const AWSKEYSECRET = require('../../constants').AWSKEYSECRET;
 
 module.exports = function () {
 
   let service = {
     sendDownEmail: sendDownEmail,
-    sendUpEmail: sendUpEmail
+    sendUpEmail: sendUpEmail,
+    sendTempWarning: sendTempWarning
   };
 
-  const auth = {
-    auth: {
-      api_key: 'key-d8ad487b612b9f5fbdd0ff2cc4e79d00',
-      domain: 'sandbox6794d726b626405582a716f4bc6aa923.mailgun.org'
-    }
-  };
+  const sesOptions = {
+    accessKeyId: AWSKEYID,
+    secretAccessKey: AWSKEYSECRET,
+    rateLimit: 5,
+    region: 'us-west-2'
+  }
 
-  const senderEmail = '"Sauron" <eyeofsauron@sandbox6794d726b626405582a716f4bc6aa923.mailgun.org>';
-  // const emailRecipientList = ['technical.ta@gmail.com', 'tgsavel@gmail.com'];
-  const emailRecipientList = 'technical.ta@gmail.com';
+  const senderEmail = '"Sauron" <InformaticsLab@cdc.gov>';
+  const emailRecipientList = ['technical.ta@gmail.com', 'hkr3@cdc.gov', 'azn6@cdc.gov', 'dhi4@cdc.gov'];
 
-  const nodemailerMailgun = nodemailer.createTransport(mg(auth));
+  let awsTransporter = nodemailer.createTransport(sesTransport(sesOptions));
 
   // const transporter = nodemailer.createTransport(smtpConfig);
 
@@ -29,12 +32,16 @@ module.exports = function () {
 
   /////////////////////////////////////////////
 
+  function sendTempWarning() {
+    //TODO
+  }
+
   function sendDownEmail(service, outageData) {
 
     // let downAt = moment(outageData.timestamp).format('MMMM Do YYYY, h:mm:ss a');
     let errorType = outageData
 
-    let sendDownNotification = nodemailerMailgun.templateSender({
+    let sendDownNotification = awsTransporter.templateSender({
       subject: '{{service}} is down! (TEST)',
       text: 'This is a notification that <b>{{service}}</b> is currently down. Please monitor Sauron for more details',
       html: `<p><b>{{service}}</b> (<a href="{{serviceUrl}}">{{serviceUrl}})</a> has gone down on <b>{{downAt}}</b>.</p> 
@@ -66,7 +73,7 @@ module.exports = function () {
 
   function sendUpEmail(service, upAt) {
 
-    let sendUpNotification = nodemailerMailgun.templateSender({
+    let sendUpNotification = awsTransporter.templateSender({
       subject: '{{service}} is back up! (TEST)',
       text: '{{service}}is now back up!',
       html: '<p><b>{{service}}</b> (<a href="{{serviceUrl}}">{{serviceUrl}})</a> is now back up!</p>'
