@@ -15,6 +15,7 @@ exports.SSL_BUNDLE = '/sec/ssl/gd_bundle-g2.crt';
 
 exports.AWSKEYID = 'AKIAJ7F7BWYFBP4FKDZQ';
 exports.AWSKEYSECRET = '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';
+exports.AWSREGION = 'us-west-2';
 /**
  * These constants set whether or not you will use proxy for Webpack DevServer
  * For advanced configuration details, go to:
