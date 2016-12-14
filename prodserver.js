@@ -11,13 +11,13 @@ var jira = require('./api/jira');
 var bodyParser = require('body-parser');
 var http = require('http');
 
-var E2E_PORT = require('./varants').E2E_PORT;
-var HOST = require('./varants').HOST;
-var PROD_PORT = require('./varants').PROD_PORT;
-var HTTPS_PORT = require('./varants').HTTP_PORT;
-var SSL_KEY = require('./varants').SSL_KEY;
-var SSL_CERT = require('./varants').SSL_CERT;
-var SSL_BUNDLE = require('./varants').SSL_BUNDLE;
+var E2E_PORT = require('./constants').E2E_PORT;
+var HOST = require('./constants').HOST;
+var PROD_PORT = require('./constants').PROD_PORT;
+var HTTPS_PORT = require('./constants').HTTP_PORT;
+var SSL_KEY = require('./constants').SSL_KEY;
+var SSL_CERT = require('./constants').SSL_CERT;
+var SSL_BUNDLE = require('./constants').SSL_BUNDLE;
 
 var app = express();
 var ROOT = path.join(path.resolve(__dirname, '..'));
