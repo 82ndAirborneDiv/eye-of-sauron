@@ -41,7 +41,7 @@ module.exports = function () {
         let now = +new Date;
         let shouldSend = false;
         let sendHeatWarning = awsTransporter.templateSender({
-            subject: '**WARNING** Air temperature in server room is high (TEST)',
+            subject: '**WARNING** Air temperature in server room is high!',
             text: '**WARNING** Current server room temperature: {{serverRoomTemp}}at {{currentTime}} is over the specified threshold.',
             html: `<p>**<b>WARNING</>**</b></p> <p>Server room air temperature: <b>{{serverRoomTemp}}&deg;F</b></p>
             <p>Time: <b>{{currentTime}}</b><p/> 
@@ -78,7 +78,7 @@ module.exports = function () {
         let errorType = outageData
 
         let sendDownNotification = awsTransporter.templateSender({
-            subject: '{{service}} is down! (TEST)',
+            subject: '{{service}} is down!',
             text: 'This is a notification that <b>{{service}}</b> is currently down. Please monitor Sauron for more details',
             html: `<p><b>{{service}}</b> (<a href="{{serviceUrl}}">{{serviceUrl}})</a> has gone down at <b>{{downAt}}</b>.</p> 
             <p><b>{{errorType}}</b></p>`
@@ -109,7 +109,7 @@ module.exports = function () {
     function sendUpEmail(service, upAt) {
 
         let sendUpNotification = awsTransporter.templateSender({
-            subject: '{{service}} has been restored! (TEST)',
+            subject: '{{service}} has been restored!',
             text: '{{service}}is now back up!',
             html: '<p><b>{{service}}</b> (<a href="{{serviceUrl}}">{{serviceUrl}})</a> has been restored and is back online.</p>'
         }, {
