@@ -99,7 +99,6 @@
     "ng2-toasty": "^2.1.0",
     "ngrx-store-freeze": "0.1.4",
     "ngrx-store-logger": "0.1.7",
-    "nodemailer-ses-transport": "^1.5.0",
     "rxjs": "5.0.0-beta.12",
     "zone.js": "0.6.26"
   },
