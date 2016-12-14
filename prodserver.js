@@ -1,28 +1,28 @@
 "use strict";
-const compression = require('compression')
-const express = require('express'),
+var compression = require('compression')
+var express = require('express'),
     path = require('path');
 
-const storeFactory = require('./labmonitor/lib/storage/storage-factory');
-const sensor = require('./api/pi-sensor');
-const report = require('./api/reports');
-const services = require('./api/services');
-const jira = require('./api/jira');
-const bodyParser = require('body-parser');
-const http = require('http');
+var storeFactory = require('./labmonitor/lib/storage/storage-factory');
+var sensor = require('./api/pi-sensor');
+var report = require('./api/reports');
+var services = require('./api/services');
+var jira = require('./api/jira');
+var bodyParser = require('body-parser');
+var http = require('http');
 
-const E2E_PORT = require('./constants').E2E_PORT;
-const HOST = require('./constants').HOST;
-const PROD_PORT = require('./constants').PROD_PORT;
-const HTTPS_PORT = require('./constants').HTTP_PORT;
-const SSL_KEY = require('./constants').SSL_KEY;
-const SSL_CERT = require('./constants').SSL_CERT;
-const SSL_BUNDLE = require('./constants').SSL_BUNDLE;
+var E2E_PORT = require('./varants').E2E_PORT;
+var HOST = require('./varants').HOST;
+var PROD_PORT = require('./varants').PROD_PORT;
+var HTTPS_PORT = require('./varants').HTTP_PORT;
+var SSL_KEY = require('./varants').SSL_KEY;
+var SSL_CERT = require('./varants').SSL_CERT;
+var SSL_BUNDLE = require('./varants').SSL_BUNDLE;
 
-const app = express();
-const ROOT = path.join(path.resolve(__dirname, '..'));
+var app = express();
+var ROOT = path.join(path.resolve(__dirname, '..'));
 
-let store = storeFactory.getStorageInstance('development');
+var store = storeFactory.getStorageInstance('development');
 if (!store) {
     console.error('Error creating storage for env');
 }
@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static('dist/client'));
 
-const renderIndex = (req, res) => {
+var renderIndex = (req, res) => {
     res.sendFile(path.resolve(__dirname, 'dist/client/index.html'));
 }
 
@@ -42,17 +42,17 @@ app.use('/api/sites', services.getRoutes(store));
 app.use('/api/jira', jira.getRoutes());
 app.get('/*', renderIndex);
 
-const environment = process.env.NODE_ENV;
-let e2e;
-const ENV = process.env.npm_lifecycle_event;
+var environment = process.env.NODE_ENV;
+var e2e;
+var ENV = process.env.npm_lifecycle_event;
 if (ENV === 'e2e:server') { e2e = E2E_PORT };
 
 
 if (environment === 'production') {
-    const PORT = HTTPS_PORT;
-    let https = require('https'),      // module for https
+    var PORT = HTTPS_PORT;
+    var https = require('https'),      // module for https
         fs = require('fs');         // required to read certs and keys
-    let options = {
+    var options = {
         key: fs.readFileSync(SSL_KEY),
         cert: fs.readFileSync(SSL_CERT),
         ca: fs.readFileSync(SSL_BUNDLE),
@@ -69,7 +69,7 @@ if (environment === 'production') {
         res.end();
     }).listen(PROD_PORT);
 } else {
-    const PORT = e2e || PROD_PORT;
+    var PORT = e2e || PROD_PORT;
     app.listen(PORT, () => {
         console.log(`Listening on: http://${HOST}:${PORT}`);
     });
