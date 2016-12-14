@@ -1,6 +1,6 @@
 "use strict";
-const root = require('./helpers.js').root
-const ip = require('ip');
+var root = require('./helpers.js').root
+var ip = require('ip');
 
 exports.HOST = ip.address();
 exports.DEV_PORT = 3001;

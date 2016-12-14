@@ -1,11 +1,11 @@
-const nodemailer = require('nodemailer');
-const sesTransport = require('nodemailer-ses-transport');
-const htmlToText = require('nodemailer-html-to-text').htmlToText;
-const moment = require('moment');
+var nodemailer = require('nodemailer');
+var sesTransport = require('nodemailer-ses-transport');
+var htmlToText = require('nodemailer-html-to-text').htmlToText;
+var moment = require('moment');
 
-const AWSKEYID = require('../../constants').AWSKEYID;
-const AWSKEYSECRET = require('../../constants').AWSKEYSECRET;
-const AWSREGION = require('../../constants').AWSREGION;
+var AWSKEYID = require('../../constants').AWSKEYID;
+var AWSKEYSECRET = require('../../constants').AWSKEYSECRET;
+var AWSREGION = require('../../constants').AWSREGION;
 
 var monitorTime = +new Date;
 
@@ -17,15 +17,15 @@ module.exports = function () {
         sendTempWarning: sendTempWarning
     };
 
-    const sesOptions = {
+    var sesOptions = {
         accessKeyId: AWSKEYID,
         secretAccessKey: AWSKEYSECRET,
         rateLimit: 5,
         region: AWSREGION
     }
 
-    const senderEmail = '"Sauron" <InformaticsLab@cdc.gov>';
-    const emailRecipientList = ['technical.ta@gmail.com', 'hkr3@cdc.gov', 'azn6@cdc.gov', 'dhi4@cdc.gov', 'sdavid@deloitte.com', 'kta@deloitte.com'];
+    var senderEmail = '"Sauron" <InformaticsLab@cdc.gov>';
+    var emailRecipientList = ['technical.ta@gmail.com', 'hkr3@cdc.gov', 'azn6@cdc.gov', 'dhi4@cdc.gov', 'sdavid@deloitte.com', 'kta@deloitte.com'];
     // const emailRecipientList = ['technical.ta@gmail.com', 'kta@deloitte.com', 'sdavid@deloitte.com']; //testing list
 
     var awsTransporter = nodemailer.createTransport(sesTransport(sesOptions));
@@ -74,7 +74,6 @@ module.exports = function () {
 
     function sendDownEmail(service, outageData) {
 
-        // let downAt = moment(outageData.timestamp).format('MMMM Do YYYY, h:mm:ss a');
         var errorType = outageData
 
         var sendDownNotification = awsTransporter.templateSender({
