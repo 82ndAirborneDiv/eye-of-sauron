@@ -5,9 +5,11 @@ const moment = require('moment');
 
 const AWSKEYID = require('../../constants').AWSKEYID;
 const AWSKEYSECRET = require('../../constants').AWSKEYSECRET;
-const AWSREGION = require('../../constants').AWSREGION
+const AWSREGION = require('../../constants').AWSREGION;
 
-module.exports = function() {
+let monitorTime = +new Date;
+
+module.exports = function () {
 
     let service = {
         sendDownEmail: sendDownEmail,
@@ -23,8 +25,8 @@ module.exports = function() {
     }
 
     const senderEmail = '"Sauron" <InformaticsLab@cdc.gov>';
-    // const emailRecipientList = ['technical.ta@gmail.com', 'hkr3@cdc.gov', 'azn6@cdc.gov', 'dhi4@cdc.gov'];
-    const emailRecipientList = 'technical.ta@gmail.com';
+    const emailRecipientList = ['technical.ta@gmail.com', 'hkr3@cdc.gov', 'azn6@cdc.gov', 'dhi4@cdc.gov', 'sdavid@deloitte.com'];
+    // const emailRecipientList = ['technical.ta@gmail.com', 'kta@deloitte.com', 'sdavid@deloitte.com']; //testing list
 
     let awsTransporter = nodemailer.createTransport(sesTransport(sesOptions));
 
@@ -34,31 +36,40 @@ module.exports = function() {
 
     /////////////////////////////////////////////
 
-    function sendTempWarning(serverRoomTemp) {
+    function sendTempWarning(serverRoomTemp, warningTime) {
         //TODO
         let now = +new Date;
+        let shouldSend = false;
         let sendHeatWarning = awsTransporter.templateSender({
-            subject: '**WARNING** SERVER ROOM OVERHEATING (TEST)',
-            text: '**WARNING** Current server room temperature: {{serverRoomTemp}} is over the specified threshold at {{currentTime}}',
-            html: `<p>**<b>WARNING</>**</b> Current server room temperature: {{serverRoomTemp}} is over the specified threshold.</p>
-            <p>Please seek assistance from the infracstructure team.</p>`
+            subject: '**WARNING** Air temperature in server room is high (TEST)',
+            text: '**WARNING** Current server room temperature: {{serverRoomTemp}}at {{currentTime}} is over the specified threshold.',
+            html: `<p>**<b>WARNING</>**</b></p> <p>Server room air temperature: <b>{{serverRoomTemp}}&deg;F</b></p>
+            <p>Time: <b>{{currentTime}}</b><p/> 
+            <p>This is over the specified threshold of <b>93&deg;F</b>.</p>
+            <p>Please seek assistance from the infrastructure team.</p>`
         }, {
                 from: senderEmail
             }
         );
+        // console.log('warningTime', warningTime);
+        shouldSend = notificationlimiter(warningTime);
 
-        sendHeatWarning({
-            to: emailRecipientList
-        }, {
-                serverRoomTemp: serverRoomTemp,
-                currentTime: moment(now).format('h:mm:ss a, MMMM Do YYYY')
-            }, (err, info) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log('Overheat warning sent');
+        if (shouldSend) {
+            sendHeatWarning({
+                to: emailRecipientList
+            }, {
+                    serverRoomTemp: serverRoomTemp.toFixed(2),
+                    currentTime: moment(now).format('h:mm:ss a, MMMM Do YYYY')
+                }, (err, info) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log('Overheat warning sent');
+                    }
                 }
-            })
+            );
+        }
+
     }
 
     function sendDownEmail(service, outageData) {
@@ -70,8 +81,7 @@ module.exports = function() {
             subject: '{{service}} is down! (TEST)',
             text: 'This is a notification that <b>{{service}}</b> is currently down. Please monitor Sauron for more details',
             html: `<p><b>{{service}}</b> (<a href="{{serviceUrl}}">{{serviceUrl}})</a> has gone down at <b>{{downAt}}</b>.</p> 
-            <p>{{errorType}}</p>
-            <p> Please monitor <a href="{{sauron}}">Sauron</a> for more details.</p>`
+            <p><b>{{errorType}}</b></p>`
         }, {
                 from: senderEmail
             }
@@ -99,9 +109,9 @@ module.exports = function() {
     function sendUpEmail(service, upAt) {
 
         let sendUpNotification = awsTransporter.templateSender({
-            subject: '{{service}} is back up! (TEST)',
+            subject: '{{service}} has been restored! (TEST)',
             text: '{{service}}is now back up!',
-            html: '<p><b>{{service}}</b> (<a href="{{serviceUrl}}">{{serviceUrl}})</a> is now back up!</p>'
+            html: '<p><b>{{service}}</b> (<a href="{{serviceUrl}}">{{serviceUrl}})</a> has been restored and is back online.</p>'
         }, {
                 from: senderEmail
             }
@@ -120,6 +130,25 @@ module.exports = function() {
                 }
             }
         );
+    }
+
+
+    function notificationlimiter(messageTime) {
+        let sentTime = moment(messageTime);
+        let currentTime = moment(monitorTime);
+        let messageBufferTime = 30; //in minutes
+
+        let diff = moment.utc(moment(sentTime, "DD/MM/YYYY HH:mm:ss").diff(moment(currentTime, "DD/MM/YYYY HH:mm:ss"))).format("mm");
+
+        console.log(diff);
+        if (diff >= messageBufferTime) {
+            console.log(true);
+            monitorTime = +new Date;
+            return true;
+        } else {
+            // return false;
+            console.log(false);
+        }
     }
 
 };
