@@ -5,7 +5,7 @@ var moment = require('moment');
 
 var mailer = require('../labmonitor/lib/mailer')();
 
-let notificationTime;
+var notificationTime;
 
 module.exports.getRoutes = function () {
   var router = express.Router();
@@ -16,7 +16,7 @@ module.exports.getRoutes = function () {
     request(url, function (error, response, body) {
       if (!error && response.statusCode === 200) {
         var parsedObj = JSON.parse(body);
-        let currentTemp = parsedObj.variables.sensorData.temperature;
+        var currentTemp = parsedObj.variables.sensorData.temperature;
 
         if (currentTemp > 93) {
           // if (true) {  //for testing
