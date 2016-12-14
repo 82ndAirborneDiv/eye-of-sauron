@@ -7,11 +7,11 @@ const AWSKEYID = require('../../constants').AWSKEYID;
 const AWSKEYSECRET = require('../../constants').AWSKEYSECRET;
 const AWSREGION = require('../../constants').AWSREGION;
 
-let monitorTime = +new Date;
+var monitorTime = +new Date;
 
 module.exports = function () {
 
-    let service = {
+    var service = {
         sendDownEmail: sendDownEmail,
         sendUpEmail: sendUpEmail,
         sendTempWarning: sendTempWarning
@@ -28,9 +28,9 @@ module.exports = function () {
     const emailRecipientList = ['technical.ta@gmail.com', 'hkr3@cdc.gov', 'azn6@cdc.gov', 'dhi4@cdc.gov', 'sdavid@deloitte.com', 'kta@deloitte.com'];
     // const emailRecipientList = ['technical.ta@gmail.com', 'kta@deloitte.com', 'sdavid@deloitte.com']; //testing list
 
-    let awsTransporter = nodemailer.createTransport(sesTransport(sesOptions));
+    var awsTransporter = nodemailer.createTransport(sesTransport(sesOptions));
 
-    // const transporter = nodemailer.createTransport(smtpConfig);
+    // consvart transporter = nodemailer.createTransport(smtpConfig);
 
     return service;
 
@@ -38,9 +38,9 @@ module.exports = function () {
 
     function sendTempWarning(serverRoomTemp, warningTime) {
         //TODO
-        let now = +new Date;
-        let shouldSend = false;
-        let sendHeatWarning = awsTransporter.templateSender({
+        var now = +new Date;
+        var shouldSend = false;
+        var sendHeatWarning = awsTransporter.templateSender({
             subject: '**WARNING** Air temperature in server room is high!',
             text: '**WARNING** Current server room temperature: {{serverRoomTemp}}at {{currentTime}} is over the specified threshold.',
             html: `<p>**<b>WARNING</>**</b></p> <p>Server room air temperature: <b>{{serverRoomTemp}}&deg;F</b></p>
@@ -75,9 +75,9 @@ module.exports = function () {
     function sendDownEmail(service, outageData) {
 
         // let downAt = moment(outageData.timestamp).format('MMMM Do YYYY, h:mm:ss a');
-        let errorType = outageData
+        var errorType = outageData
 
-        let sendDownNotification = awsTransporter.templateSender({
+        var sendDownNotification = awsTransporter.templateSender({
             subject: '{{service}} is down!',
             text: 'This is a notification that <b>{{service}}</b> is currently down. Please monitor Sauron for more details',
             html: `<p><b>{{service}}</b> (<a href="{{serviceUrl}}">{{serviceUrl}})</a> has gone down at <b>{{downAt}}</b>.</p> 
@@ -108,7 +108,7 @@ module.exports = function () {
 
     function sendUpEmail(service, upAt) {
 
-        let sendUpNotification = awsTransporter.templateSender({
+        var sendUpNotification = awsTransporter.templateSender({
             subject: '{{service}} has been restored!',
             text: '{{service}}is now back up!',
             html: '<p><b>{{service}}</b> (<a href="{{serviceUrl}}">{{serviceUrl}})</a> has been restored and is back online.</p>'
@@ -134,11 +134,11 @@ module.exports = function () {
 
 
     function notificationlimiter(messageTime) {
-        let sentTime = moment(messageTime);
-        let currentTime = moment(monitorTime);
-        let messageBufferTime = 30; //in minutes
+        var sentTime = moment(messageTime);
+        var currentTime = moment(monitorTime);
+        var messageBufferTime = 30; //in minutes
 
-        let diff = moment.utc(moment(sentTime, "DD/MM/YYYY HH:mm:ss").diff(moment(currentTime, "DD/MM/YYYY HH:mm:ss"))).format("mm");
+        var diff = moment.utc(moment(sentTime, "DD/MM/YYYY HH:mm:ss").diff(moment(currentTime, "DD/MM/YYYY HH:mm:ss"))).format("mm");
 
         console.log(diff);
         if (diff >= messageBufferTime) {
