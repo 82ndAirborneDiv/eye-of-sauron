@@ -17,6 +17,7 @@
     "debug": "^2.3.0",
     "events": "^1.1.1",
     "moment": "^2.15.2",
+    "moment-timezone": "^0.5.11",
     "nodemailer": "^2.7.0",
     "nodemailer-html-to-text": "^2.1.0",
     "nodemailer-mailgun-transport": "^1.2.2",

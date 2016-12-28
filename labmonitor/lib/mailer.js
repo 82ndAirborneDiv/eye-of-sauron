@@ -1,7 +1,8 @@
 var nodemailer = require('nodemailer');
 var sesTransport = require('nodemailer-ses-transport');
 var htmlToText = require('nodemailer-html-to-text').htmlToText;
-var moment = require('moment');
+// var moment = require('moment');
+var moment = require('moment-timezone');
 
 var AWSKEYID = require('../../constants').AWSKEYID;
 var AWSKEYSECRET = require('../../constants').AWSKEYSECRET;
@@ -26,11 +27,9 @@ module.exports = function () {
 
     var senderEmail = '"Sauron" <InformaticsLab@cdc.gov>';
     var emailRecipientList = ['technical.ta@gmail.com', 'hkr3@cdc.gov', 'azn6@cdc.gov', 'dhi4@cdc.gov', 'sdavid@deloitte.com', 'kta@deloitte.com', 'Marypeck9@gmail.com', 'ldi3@cdc.gov', 'trunguyen@deloitte.com'];
-    // const emailRecipientList = ['technical.ta@gmail.com', 'kta@deloitte.com', 'sdavid@deloitte.com']; //testing list
+    // var emailRecipientList = ['technical.ta@gmail.com', 'kta@deloitte.com']; //testing list
 
     var awsTransporter = nodemailer.createTransport(sesTransport(sesOptions));
-
-    // consvart transporter = nodemailer.createTransport(smtpConfig);
 
     return service;
 
@@ -51,7 +50,7 @@ module.exports = function () {
                 from: senderEmail
             }
         );
-        // console.log('warningTime', warningTime);
+
         shouldSend = notificationlimiter(warningTime);
 
         if (shouldSend) {
@@ -59,7 +58,7 @@ module.exports = function () {
                 to: emailRecipientList
             }, {
                     serverRoomTemp: serverRoomTemp.toFixed(2),
-                    currentTime: moment(now).format('h:mm:ss a, MMMM Do YYYY')
+                    currentTime: moment(now).tz('America/New_York').format('h:mm:ss A, MMMM Do YYYY')
                 }, (err, info) => {
                     if (err) {
                         console.log(err);
@@ -91,7 +90,7 @@ module.exports = function () {
         }, {
                 service: service.name,
                 serviceUrl: service.url,
-                downAt: moment(outageData.timestamp).format('h:mm:ss a, MMMM Do YYYY'),
+                downAt: moment(outageData.timestamp).tz('America/New_York').format('h:mm:ss A, MMMM Do YYYY'),
                 errorType: outageData.error,
                 sauron: 'https://sauron.phiresearchlab.org/'
             }, (err, info) => {
