@@ -3,7 +3,7 @@ var http = require('http'),
     request = require('request'),
     _ = require('lodash');
 
-module.exports.getRoutes = function() {
+module.exports.getRoutes = function () {
     var router = express.Router();
     var auth = {
         'auth': {
@@ -29,10 +29,10 @@ module.exports.getRoutes = function() {
         this.creator = creator;
     }
 
-    router.get('/reservations', function(req, res) {
+    router.get('/reservations', function (req, res) {
         var reservationsQuery = 'https://jira.phiresearchlab.org/rest/api/2/search?jql=project%20%3D%20IIUSD%20AND%20issuetype%20%3D%20%22Room%20Request%22%20AND%20status%20%3D%20%22Room%20Reserved%22';
 
-        request(reservationsQuery, auth, function(error, response, body) {
+        request(reservationsQuery, auth, function (error, response, body) {
             if (!error && response.statusCode === 200) {
                 var dateNow = +new Date();
                 var parsedObj = JSON.parse(body);
@@ -129,25 +129,25 @@ module.exports.getRoutes = function() {
 
     });
 
-    router.get('/issues', function(req, res) {
+    router.get('/issues', function (req, res) {
         var completedCountQuery = 'https://jira.phiresearchlab.org/rest/api/2/search?jql=project%20%3D%2011900%20AND%20resolution%20%3D%20Complete';
         var unresolvedCountQuery = 'https://jira.phiresearchlab.org/rest/api/2/search?jql=project%20%3D%2011900%20AND%20resolution%20is%20EMPTY';
         var canceledCountQuery = 'https://jira.phiresearchlab.org/rest/api/2/search?jql=project%20%3D%2011900%20AND%20resolution%20%3D%20Canceled';
 
         var chartData = [];
-        request(completedCountQuery, auth, function(error, response, body) {
+        request(completedCountQuery, auth, function (error, response, body) {
             if (!error && response.statusCode === 200) {
                 var parsedObj = JSON.parse(body);
                 // console.log(parsedObj);
 
                 chartData.push(parsedObj.total);
 
-                request(unresolvedCountQuery, auth, function(error, response, body) {
+                request(unresolvedCountQuery, auth, function (error, response, body) {
                     if (!error && response.statusCode === 200) {
                         var parsedObj = JSON.parse(body);
 
                         chartData.push(parsedObj.total);
-                        request(canceledCountQuery, auth, function(error, response, body) {
+                        request(canceledCountQuery, auth, function (error, response, body) {
                             if (!error && response.statusCode === 200) {
                                 var parsedObj = JSON.parse(body);
                                 chartData.push(parsedObj.total);
@@ -166,10 +166,10 @@ module.exports.getRoutes = function() {
         });
     });
 
-    router.get('/unresolved', function(req, res) {
+    router.get('/unresolved', function (req, res) {
         var unresolvedQuery = 'https://jira.phiresearchlab.org/rest/api/2/search?jql=project%20%3D%20IIUSD%20AND%20issuetype%20in%20standardIssueTypes()%20AND%20resolution%20%3D%20Unresolved';
 
-        request(unresolvedQuery, auth, function(error, response, body) {
+        request(unresolvedQuery, auth, function (error, response, body) {
             if (!error && response.statusCode === 200) {
                 var parsedObj = JSON.parse(body);
                 var unresolvedArray = [];
@@ -192,7 +192,7 @@ module.exports.getRoutes = function() {
                 res.send(unresolvedArray);
             } else {
                 console.log(error);
-                res.send(error);
+                // res.send(error);
             }
         });
     });
