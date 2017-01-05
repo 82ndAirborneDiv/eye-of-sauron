@@ -39,6 +39,7 @@ storage.getServices({}, function (err, services) {
   pluginLoader.loadPlugins(watchmen, {}, function () {
     watchmen.startAll({ randomDelayOnInit: program.maxInitialDelay });
     console.log('\nwatchmen has started. ' + services.length + ' services loaded\n');
+    // console.log(services);
 
     var sentinel = new sentinelFactory(storage, watchmen, { interval: 10000 });
     sentinel.watch();

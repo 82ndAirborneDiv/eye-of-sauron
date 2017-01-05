@@ -77,6 +77,7 @@ export class AdminComponent {
         error => this.errorMessage = <any>error
         )
     } else {
+      console.log('updating service');
       this._serviceService.update(service.id, service)
         .subscribe(
         service => {
