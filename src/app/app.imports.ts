@@ -16,6 +16,7 @@ import { UserEffects } from './user/user.effects';
 
 import { SidebarModule } from 'ng2-sidebar';
 import { ToastyModule } from 'ng2-toasty';
+import { MomentModule } from 'angular2-moment';
 
 const STORE_DEV_TOOLS_IMPORTS = [];
 if (ENV === 'development' && !AOT &&
@@ -39,6 +40,7 @@ export const APP_IMPORTS = [
     STORE_DEV_TOOLS_IMPORTS,
     StoreDevToolsModule,
     SidebarModule,
-    ToastyModule.forRoot()
+    ToastyModule.forRoot(),
+    MomentModule
 ];
 

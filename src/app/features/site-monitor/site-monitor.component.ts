@@ -17,7 +17,7 @@ export class SiteMonitorComponent {
 
   ngOnInit() {
     this.getReports();
-    // this.refreshedTimestamp = +new Date();
+    this.refreshedTimestamp = +new Date();
   }
 
   ngAfterContentInit() {
@@ -35,8 +35,8 @@ export class SiteMonitorComponent {
   autoRefresh() {
     setInterval(() => {
       this.getReports();
-      // this.refreshedTimestamp = +new Date()
-    }, 90000);
+      this.refreshedTimestamp = +new Date()
+    }, 300000);
   }
 
 }

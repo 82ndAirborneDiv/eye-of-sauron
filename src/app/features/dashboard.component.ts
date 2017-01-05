@@ -66,7 +66,7 @@ export class DashboardComponent implements OnDestroy, OnInit {
 
       let ampm = hours <= 11 ? ' AM' : ' PM';
       let strTime = [(hours === 12 ? "12" : hours % 12),
-      (minutes < 10 ? "0" + minutes : minutes)
+      (minutes < 10 ? "0" + minutes : minutes), (s < 10 ? "0" + s : s)
       ].join(':') + ampm;
 
       this.currentTime = strTime;
