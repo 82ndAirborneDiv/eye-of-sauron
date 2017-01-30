@@ -26,7 +26,7 @@ module.exports = function () {
     }
 
     var senderEmail = '"Sauron" <InformaticsLab@cdc.gov>';
-    var emailRecipientList = ['technical.ta@gmail.com', 'hkr3@cdc.gov', 'azn6@cdc.gov', 'dhi4@cdc.gov', 'sdavid@deloitte.com', 'kta@deloitte.com', 'Marypeck9@gmail.com', 'ldi3@cdc.gov', 'trunguyen@deloitte.com'];
+    var emailRecipientList = ['technical.ta@gmail.com', 'hkr3@cdc.gov', 'azn6@cdc.gov', 'dhi4@cdc.gov', 'sdavid@deloitte.com', 'kta@deloitte.com', 'Marypeck9@gmail.com', 'ldi3@cdc.gov', 'trunguyen@deloitte.com', 'tgsavel@gmail.com'];
     // var emailRecipientList = ['technical.ta@gmail.com', 'kta@deloitte.com']; //testing list
 
     var awsTransporter = nodemailer.createTransport(sesTransport(sesOptions));
