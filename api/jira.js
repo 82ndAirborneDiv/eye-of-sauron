@@ -1,6 +1,7 @@
 var http = require('http'),
     express = require('express'),
     request = require('request'),
+    moment = require('moment'),
     _ = require('lodash');
 
 module.exports.getRoutes = function () {
@@ -35,6 +36,7 @@ module.exports.getRoutes = function () {
         request(reservationsQuery, auth, function (error, response, body) {
             if (!error && response.statusCode === 200) {
                 var dateNow = +new Date();
+                dateNow = moment(dateNow).format('YYYY-MM-DD');
                 var parsedObj = JSON.parse(body);
                 var roomReservationArray = [];
                 parsedObj = parsedObj.issues;
@@ -115,12 +117,12 @@ module.exports.getRoutes = function () {
                 }
                 var filteredArray = [];
                 for (var j = 0; j < roomReservationArray.length; j++) {
-                    if (roomReservationArray[j].reservedDate >= dateNow) {
+                    var reservationDate = moment(roomReservationArray[j].reservedDate).format('YYYY-MM-DD');
+                    if (reservationDate >= dateNow) {
                         filteredArray.push(roomReservationArray[j]);
                     }
                 }
                 filteredArray = _.orderBy(filteredArray, ['reservedDate'], ['asc']);
-                // console.log(filteredArray);
                 return res.send(filteredArray);
             } else {
                 console.log(error);
