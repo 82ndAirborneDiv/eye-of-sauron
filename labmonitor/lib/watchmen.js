@@ -143,6 +143,11 @@ WatchMen.prototype.ping = function (params, callback) {
             if (currentOutage) {
               debug('emit current outage');
               self.emit('service-back', service, currentOutage);
+              if (service.timeoutId) {
+                delete service.running;
+                delete service.pingService;
+                delete service.timeoutId;
+              }
               service.startMonitorTime = +new Date();
               mailer.sendUpEmail(service);
               storage.updateService(service, function (err, updatedService) {
