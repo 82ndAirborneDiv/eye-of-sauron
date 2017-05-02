@@ -12,7 +12,7 @@ module.exports.getRoutes = function () {
   var router = express.Router();
 
   router.get('/data', function (req, res) {
-    var url = 'http://12.96.10.100:3000';
+    var url = 'http://raspberry.phiresearchlab.org';
 
     request(url, function (error, response, body) {
       if (!error && response.statusCode === 200) {
@@ -22,8 +22,8 @@ module.exports.getRoutes = function () {
         if (currentTemp > 93) {
           // if (true) {  //for testing
           thresholdCount++;
-          
-          if(thresholdCount > 5) {
+
+          if (thresholdCount > 5) {
             notificationTime = +new Date;
             mailer.sendTempWarning(currentTemp, notificationTime);   //currently disabled until I see how they want to deal with notifcations
             thresholdCount = 0;
