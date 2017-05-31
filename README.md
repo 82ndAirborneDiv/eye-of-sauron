@@ -25,17 +25,9 @@ yarn start
   * @types
 * Bootstrap 4 and @ng-bootstrap
 * @ngrx
-  * store (RxJS powered state management for Angular2 apps, inspired by Redux)
-  * effects (Side effect model for @ngrx/store)
-  * router-store (Bindings to connect angular/router to ngrx/store)
-  * store-devtools (Developer Tools for @ngrx/store)
-  * store-log-monitor (Log Monitor for @ngrx/store-devtools and Angular 2)
-  * ngrx-store-logger (Advanced console logging for @ngrx/store applications, ported from redux-logger.)
-  * ngrx-store-freeze in dev mode (@ngrx/store meta reducer that prevents state from being mutated.)
 * Karma/Jasmine testing
 * Protractor for E2E testing
 
-## Project Goals
 
 ## Basic scripts
 
@@ -49,15 +41,7 @@ Use `yarn run server:prod` for production server and production watch. Default p
 
 Default ports and option to use proxy backend for dev server can be changed in `constants.js` file.
 
-### Store Log Monitor / Store Logger
 
-In development mode, the store log monitor appears on the right hand of your screen. This allows
-you to view your stored state and manipulate your state history. By default, the monitor is NOT imported
-when you are in production mode. State history is also not saved in production mode.
-
-There is also an option to use store-logger which outputs to the console instead of your application view.
-To set your development mode store logging preference, go to the constant.js file and edit the `STORE_DEV_TOOLS` constant.
-Available options are `monitor | logger | both | none`
 
 ### HMR (Hot Module Replacement)
 
