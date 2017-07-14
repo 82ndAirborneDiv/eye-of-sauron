@@ -27,26 +27,33 @@ if (!store) {
     console.error('Error creating storage for env');
 }
 
+var environment = process.env.NODE_ENV;
+
 app.use(compression());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static('dist/client'));
-
-var renderIndex = (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'dist/client/index.html'));
-}
 
 app.use('/api/sensor', sensor.getRoutes());
 app.use('/api/report', report.getRoutes(store));
 app.use('/api/sites', services.getRoutes(store));
 app.use('/api/jira', jira.getRoutes());
-app.get('/*', renderIndex);
 
-var environment = process.env.NODE_ENV;
+if (environment === 'dev') {
+   app.use(express.static('./src/client'));
+   app.use('/*', express.static('./src/index.html'));
+   app.use(express.static('./dll'));
+   app.use(express.static('./src'));
+} else {
+  var renderIndex = (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'dist/client/index.html'))
+  }
+  app.use(express.static('dist/client'));
+  app.get('/*', express.static('./dist/index.html'));
+}
+
 var e2e;
 var ENV = process.env.npm_lifecycle_event;
 if (ENV === 'e2e:server') { e2e = E2E_PORT };
-
 
 if (environment === 'production') {
     var PORT = HTTPS_PORT;
