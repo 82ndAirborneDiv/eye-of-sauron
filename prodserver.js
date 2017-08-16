@@ -37,7 +37,7 @@ var renderIndex = (req, res) => {
 }
 
 app.use('/api/sensor', sensor.getRoutes());
-app.use('/api/report', report.getRoutes(store));
+app.use('/api/reports', report.getRoutes(store));
 app.use('/api/sites', services.getRoutes(store));
 app.use('/api/jira', jira.getRoutes());
 app.get('/*', renderIndex);

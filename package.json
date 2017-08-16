@@ -1,11 +1,10 @@
 {
-  "name": "angular-webpack2-starter",
+  "name": "sauron-iiu-monitor",
   "version": "1.12.0",
-  "description": "Angular and Webpack 2 Starter",
-  "author": "Qdouble <qdouble@gmail.com>",
+  "description": "Sauron IIU Monitor",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/qdouble/angular-webpack2-starter.git"
+    "url": "https://github.com/informaticslab/eye-of-sauron"
   },
   "scripts": {
     "postinstall": "npm run sass && npm run build:dll",
@@ -46,7 +45,7 @@
     "compile:dev": "npm run sass && npm run clean:compile && npm run ngc && npm run build:aot:dev",
     "compile:only": "npm run clean:compile && npm run sass && npm run ngc",
     "compile:watch": "watch-run -i npm run compile:only -p 'src/app/**/*.ts, src/app/**/*.scss' npm run compile:only",
-    "prodserver": "node prodserver",
+    "prodserver": "nodemon prodserver",
     "sass": "node-sass src -o src --include-path node_modules --output-style compressed -q",
     "sass:watch": "node-sass -w src -o src --include-path node_modules --output-style compressed -q",
     "start": "npm run server:dev",
@@ -117,6 +116,7 @@
     "codelyzer": "~1.0.0-beta.1",
     "compression": "1.6.2",
     "compression-webpack-plugin": "~0.3.1",
+    "concurrently": "^3.4.0",
     "copy-webpack-plugin": "~4.0.0",
     "css-loader": "~0.25.0",
     "es6-promise": "~3.3.0",
@@ -157,9 +157,5 @@
     "webpack-dev-middleware": "~1.8.1",
     "webpack-dev-server": "2.1.0-beta.9"
   },
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/qdouble/angular-webpack2-starter/issues"
-  },
-  "homepage": "https://github.com/qdouble/angular-webpack2-starter#readme"
+  "license": "Apache-2.0"
 }
