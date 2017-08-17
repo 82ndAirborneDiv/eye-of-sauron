@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { routes } from './lazy.routing';
+import { routes } from './details.routing';
 
-import { LazyComponent } from './lazy.component';
+import { DetailsComponent } from './details.component';
 
 
 @NgModule({
@@ -12,9 +12,9 @@ import { LazyComponent } from './lazy.component';
     RouterModule.forChild(routes)
   ],
   declarations: [
-    LazyComponent
+    DetailsComponent
   ]
 })
 
-export class LazyModule {}
+export class DetailsModule { }
 

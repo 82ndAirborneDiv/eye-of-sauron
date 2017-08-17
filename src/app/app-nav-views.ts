@@ -6,9 +6,9 @@ export const views: Object[] = [
   {
     name: 'Admin',
     link: ['admin']
+  },
+  {
+    name: 'Details',
+    link: ['details']
   }
-  // {
-  //   name: 'Lazy',
-  //   link: ['lazy']
-  // }
 ];

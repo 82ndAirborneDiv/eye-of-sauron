@@ -92,6 +92,7 @@
     "angular2-moment": "^1.0.0",
     "body-parser": "^1.15.2",
     "bootstrap": "^4.0.0-alpha.4",
+    "chart.js": "^2.6.0",
     "core-js": "2.4.1",
     "lodash": "^4.16.6",
     "moment": "^2.16.0",
