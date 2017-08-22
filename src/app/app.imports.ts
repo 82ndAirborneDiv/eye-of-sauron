@@ -8,6 +8,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { useLogMonitor } from '@ngrx/store-log-monitor';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ChartsModule } from 'ng2-charts';
+
 
 import { routes } from './app.routing';
 import { rootReducer } from './reducers';
@@ -41,6 +43,7 @@ export const APP_IMPORTS = [
     StoreDevToolsModule,
     SidebarModule,
     ToastyModule.forRoot(),
-    MomentModule
+    MomentModule,
+    ChartsModule
 ];
 

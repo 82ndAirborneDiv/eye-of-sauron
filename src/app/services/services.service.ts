@@ -20,6 +20,13 @@ export class Service {
   ) { }
 }
 
+export class ServiceDetail {
+  constructor(
+    public service: Object,
+    public status: Object
+  ) { }
+}
+
 @Injectable()
 export class ServicesService extends RequestBase {
   constructor(private _http: Http) {
@@ -63,7 +70,15 @@ export class ServicesService extends RequestBase {
 
   getServicesById(id) {
     let url = '/api/services/' + id;
-    return this._http.get(url, this.headers)
+    return this._http.get(url, this.options)
+      .map((response: Response) => <Service[]>response.json())
+      .catch(this.handleError);
+  }
+
+  getServiceDetails(id) {
+    // console.log(id);
+    let url = '/api/report/services/' + id;
+    return this._http.get(url, this.options)
       .map((response: Response) => <Service[]>response.json())
       .catch(this.handleError);
   }
