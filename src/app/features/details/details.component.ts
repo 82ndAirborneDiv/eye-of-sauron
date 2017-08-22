@@ -11,17 +11,8 @@ import { BaseChartDirective } from 'ng2-charts';
 
 export class DetailsComponent {
   errorMessage: string;
-  serviceDetails: ServiceDetail;
-  serviceId = 'HkZ9-FVOZ';
-
-  private latencyArray = [
-    { 'l': 6474.285714285715, 't': 1503349200000 },
-    { 'l': 7284.811320754717, 't': 1503345600000 },
-    { 'l': 3564.877551020408, 't': 1503342000000 },
-    { 'l': 1705.7931034482758, 't': 1503338400000 },
-    { 'l': 2754.703703703704, 't': 1503334800000 },
-    { 'l': 2594.5, 't': 1503331200000 }
-  ];
+  serviceDetails = null;
+  serviceId = 'S1qkzYV_b';
 
   private latencyData;
 
@@ -35,7 +26,7 @@ export class DetailsComponent {
   // private labels = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'];
   private labels;
 
-  private datasets = [];
+  private datasets;
 
   private options = {
     scales: {
@@ -59,7 +50,9 @@ export class DetailsComponent {
     this.getServicesDetails(this.serviceId);
 
 
-    this.latencyData = this.parseArrayObjectsForCharting(this.latencyArray, 't', 'l');
+    // this.latencyData = this.parseArrayObjectsForCharting(this.latencyArray, 't', 'l');
+    // console.log(this.serviceDetails);
+    ;
     // console.log(this.serviceDetails);
     // status = this.serviceDetails.status;
     // console.log('status object: ', status);
@@ -67,18 +60,7 @@ export class DetailsComponent {
     // console.log('last24Hours: ', last24Hours);
     // this.latencyData = this.parseArrayObjectsForCharting(last24Hours, 't', 'l');
 
-    this.latencySeries = this.latencyData.data;
-    this.timeSeries = this.latencyData.time;
 
-
-    this.labels = this.timeSeries;
-
-    this.datasets = [
-      {
-        label: "Latency Last 24 Hours",
-        data: this.latencySeries
-      }
-    ];
   }
 
   getServicesDetails(id): void {
@@ -88,7 +70,25 @@ export class DetailsComponent {
       .subscribe(
       serviceDetails => {
         this.serviceDetails = serviceDetails
+        // console.log('service details', this.serviceDetails);
+        this.latencyData = this.parseArrayObjectsForCharting(this.serviceDetails.status.last24Hours.latency.list, 't', 'l')
+        console.log('latency data', this.latencyData);
+        this.latencySeries = this.latencyData.data;
+        console.log('latency series: ', this.latencySeries);
+        this.timeSeries = this.latencyData.time;
 
+
+
+        this.labels = this.timeSeries;
+        // console.log(this.labels);
+
+        this.datasets = [
+          {
+            label: "Latency Last 24 Hours",
+            data: this.latencySeries
+          }
+        ];
+        console.log('datasets: ', this.datasets);
       },
       error => this.errorMessage = <any>error
       );
