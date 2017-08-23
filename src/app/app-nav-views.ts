@@ -7,8 +7,12 @@ export const views: Object[] = [
     name: 'Admin',
     link: ['admin']
   },
+  // {
+  //   name: 'Details',
+  //   link: ['details']
+  // },
   {
-    name: 'Details',
-    link: ['details']
+    name: 'Details-Demo',
+    link: ['sync']
   }
 ];

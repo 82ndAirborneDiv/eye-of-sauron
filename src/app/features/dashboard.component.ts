@@ -18,7 +18,7 @@ import { Store } from '@ngrx/store';
 export class DashboardComponent implements OnDestroy, OnInit {
   destroyed$: Subject<any> = new Subject<any>();
   // form: FormGroup;
-  nameLabel = 'Enter your name';
+  // nameLabel = 'Enter your name';
   // user: User;
   // user$: Observable<User>;
   constructor(

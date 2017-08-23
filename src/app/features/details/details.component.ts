@@ -5,8 +5,8 @@ import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'details',
-  templateUrl: './details.component.html',
-  styleUrls: ['./details.component.css']
+  templateUrl: './details.component.html'
+  // styleUrls: ['./details.component.css']
 })
 
 export class DetailsComponent {
@@ -21,7 +21,6 @@ export class DetailsComponent {
 
   private finalTimeSeries;
   private finalLatencySeries;
-
 
   // private labels = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'];
   private labels;
@@ -48,19 +47,6 @@ export class DetailsComponent {
 
   ngOnInit() {
     this.getServicesDetails(this.serviceId);
-
-
-    // this.latencyData = this.parseArrayObjectsForCharting(this.latencyArray, 't', 'l');
-    // console.log(this.serviceDetails);
-    ;
-    // console.log(this.serviceDetails);
-    // status = this.serviceDetails.status;
-    // console.log('status object: ', status);
-    // last24Hours = status.last24Hours.latency.list;
-    // console.log('last24Hours: ', last24Hours);
-    // this.latencyData = this.parseArrayObjectsForCharting(last24Hours, 't', 'l');
-
-
   }
 
   getServicesDetails(id): void {
@@ -70,21 +56,15 @@ export class DetailsComponent {
       .subscribe(
       serviceDetails => {
         this.serviceDetails = serviceDetails
-        // console.log('service details', this.serviceDetails);
-        this.latencyData = this.parseArrayObjectsForCharting(this.serviceDetails.status.last24Hours.latency.list, 't', 'l')
-        console.log('latency data', this.latencyData);
+        this.latencyData = this.parseArrayObjectsForCharting(this.serviceDetails.status.lastHour.latency.list, 't', 'l');
         this.latencySeries = this.latencyData.data;
-        console.log('latency series: ', this.latencySeries);
         this.timeSeries = this.latencyData.time;
 
-
-
         this.labels = this.timeSeries;
-        // console.log(this.labels);
 
         this.datasets = [
           {
-            label: "Latency Last 24 Hours",
+            label: "Latency(ms) Last Hour",
             data: this.latencySeries
           }
         ];
