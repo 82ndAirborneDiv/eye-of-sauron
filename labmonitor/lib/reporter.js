@@ -85,12 +85,12 @@ Reporter.prototype.getService = function (serviceId, callback) {
         var uptimeInfoLastHour = getUptime(service, outagesLastHour,
           serviceData.status.currentOutage, lastHour);
 
-        storage.getLatencySince(serviceData.service, +new Date() - WEEK, 'day', function (err, latencyLastWeek) {
+        storage.getLatencySince(serviceData.service, +new Date() - WEEK, 10800000, function (err, latencyLastWeek) {
           if (err) {
             return callback(err);
           }
 
-          storage.getLatencySince(serviceData.service, +new Date() - DAY, 'hour', function (err, latencyLast24Hours) {
+          storage.getLatencySince(serviceData.service, +new Date() - DAY, 900000, function (err, latencyLast24Hours) {
             if (err) {
               return callback(err);
             }
@@ -180,17 +180,17 @@ function getUptime(service, outages, currentOutage, since) {
   };
 }
 
-function getOutageDuration(service, currentOutage){
-	var now = +new Date();
-	var outageDuration = null;
-	
-	if(currentOutage) {
-		var outageStart = currentOutage.timestamp;
-		outageDuration = moment(outageStart).fromNow();
-		return outageDuration;
-	} else {
-		return outageDuration;
-	}
+function getOutageDuration(service, currentOutage) {
+  var now = +new Date();
+  var outageDuration = null;
+
+  if (currentOutage) {
+    var outageStart = currentOutage.timestamp;
+    outageDuration = moment(outageStart).fromNow();
+    return outageDuration;
+  } else {
+    return outageDuration;
+  }
 }
 
 function getGeneralServiceInfo(service, storage, callback) {

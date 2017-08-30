@@ -10,9 +10,5 @@ export const views: Object[] = [
   // {
   //   name: 'Details',
   //   link: ['details']
-  // },
-  {
-    name: 'Details-Demo',
-    link: ['sync']
-  }
+  // }
 ];

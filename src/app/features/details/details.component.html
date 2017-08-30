@@ -1,19 +1,46 @@
 <section>
-  <h5>DETAILS</h5>
-  <!-- <div class="widget">
+  <div class="widget" *ngIf="serviceDetails">
     <div class="widget-header">
-      <h3>Details</h3>
+      <h4><a href="{{serviceDetails.service.url}}" target="_blank">{{serviceDetails.service.name}}</a></h4>
     </div>
     <div class="widget-body">
       <div class="row">
+        <div class="col-md-6 col-sm-6">
+          <div class="detaild-table">
+            <!-- <label>ID</label>: {{serviceDetails.service.id}} -->
+            <label>Uptime</label>: {{serviceDetails.status.upsince}}
+            <label></label>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6">
+
+        </div>
+      </div>
+      <div class="row">
         <div class="col-md-12">
-          <div *ngIf="serviceDetails">
-            <canvas baseChart class="chart" [datasets]="datasets" [labels]="labels" [options]="options" [chartType]="'line'">
+          <h5>Latency History</h5>
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-primary" [ngClass]="hourActive" (click)="getLatencyData(hour)">
+                      <input type="radio" name="lastHour" id="lastHour" autocomplete="off" >Last Hour 
+                    </label>
+            <label class="btn btn-primary" [ngClass]="twoFourHoursActive" (click)="getLatencyData(twoFour)">
+                      <input type="radio" name="last24Hours" id="last24Hours" autocomplete="off"> Last 24 Hours
+                    </label>
+            <label class="btn btn-primary" [ngClass]="weekActive" (click)="getLatencyData(week)">
+                      <input type="radio" name="lastWeek" id="lastWeek" autocomplete="off"> Last Week
+                    </label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div>
+            <canvas baseChart class="chart" [datasets]="datasets" [labels]="labels" [options]="options" [chartType]="'line'" [colors]="lineChartColors">
 
             </canvas>
           </div>
         </div>
       </div>
     </div>
-  </div> -->
-</section>>
+  </div>
+</section>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Report, SiteMonitorService } from '../../services/sitemonitor.service';
+import { RouterLink } from '@angular/router';
 
 
 @Component({

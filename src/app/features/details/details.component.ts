@@ -1,18 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Service, ServicesService, ServiceDetail } from '../../services/services.service';
 import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty';
 import { BaseChartDirective } from 'ng2-charts';
 
+import 'rxjs/add/operator/switchMap';
+
 @Component({
-  selector: 'details',
-  templateUrl: './details.component.html'
-  // styleUrls: ['./details.component.css']
+  selector: 'my-sync',
+  templateUrl: './details.component.html',
+  styleUrls: ['./details.component.css']
 })
 
+
 export class DetailsComponent {
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective;
+
   errorMessage: string;
   serviceDetails = null;
-  serviceId = 'S1qkzYV_b';
+  idParam: any;
+
+  private hourActive;
+  private twoFourHoursActive = 'active';
+  private weekActive;
+
+  private hour = 0;
+  private twoFour = 1;
+  private week = 2;
+
+  // serviceId = 'HkZ9-FVOZ';
+
+  public checkModel: any = 1;
 
   private latencyData;
 
@@ -27,48 +46,126 @@ export class DetailsComponent {
 
   private datasets;
 
+  private lineChartColors: Array<any> = [{ // grey
+    backgroundColor: 'rgba(148,159,177,0.2)',
+    borderColor: 'rgba(148,159,177,1)',
+    pointBackgroundColor: 'rgba(148,159,177,1)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+  }];
+
   private options = {
     scales: {
       yAxes: [{
+        scaleLabel: {
+          labelString: 'Latency in ms'
+        },
         ticks: {
+          fontColor: 'white',
           beginAtZero: true
         }
+      }],
+      xAxes: [{
+        ticks: {
+          fontColor: 'white'
+        }
       }]
+    },
+    legend: {
+      labels: {
+        fontColor: 'white'
+      }
     }
   };
 
   constructor(
     private _serviceService: ServicesService,
     private _toastyService: ToastyService,
-    private _toastyConfig: ToastyConfig
+    private _toastyConfig: ToastyConfig,
+    private _route: ActivatedRoute
   ) {
     this._toastyConfig.theme = 'material';
   }
 
   ngOnInit() {
-    this.getServicesDetails(this.serviceId);
+    this._route.params.subscribe(
+      idParam => {
+        this.idParam = idParam
+      }
+    )
+    this.getServicesDetails(this.idParam.id);
+
+  }
+
+
+  getLatencyData(option): void {
+    // console.log('serviceDetails: ', this.serviceDetails);
+    console.log('Passed option: ', option);
+    if (this.serviceDetails) {
+      switch (option) {
+        case 0:
+          this.latencyData = this.parseArrayObjectsForCharting(this.serviceDetails.status.lastHour.latency.list.reverse(), 't', 'l');
+          this.twoFourHoursActive = '';
+          this.hourActive = 'active';
+          this.weekActive = '';
+          break;
+        case 2:
+          this.latencyData = this.parseArrayObjectsForCharting(this.serviceDetails.status.lastWeek.latency.list.reverse(), 't', 'l');
+          this.twoFourHoursActive = '';
+          this.hourActive = '';
+          this.weekActive = 'active';
+          break;
+        default:
+          this.latencyData = this.parseArrayObjectsForCharting(this.serviceDetails.status.last24Hours.latency.list.reverse(), 't', 'l');
+          this.twoFourHoursActive = 'active';
+          this.hourActive = '';
+          this.weekActive = '';
+      }
+
+      this.latencySeries = this.latencyData.data;
+      this.timeSeries = this.latencyData.time;
+
+      this.labels = this.timeSeries;
+
+      console.log('Labels: ', this.labels)
+
+      this.datasets = [
+        {
+          label: "Latency in ms",
+          data: this.latencySeries,
+          pointBorderColor: 'blue',
+          borderColor: 'blue'
+        }
+      ];
+      this.reloadChart();
+    }
+  }
+
+  reloadChart() {
+    console.log('reloadChart fires');
+    console.log('chart: ', this.chart);
+    if (this.chart !== undefined) {
+      this.chart.chart.destroy();
+      this.chart.chart = 0;
+
+      this.chart.datasets = this.datasets;
+      this.chart.labels = this.labels;
+      this.chart.ngOnInit();
+    }
   }
 
   getServicesDetails(id): void {
+
     let status;
     let last24Hours;
+
     this._serviceService.getServiceDetails(id)
       .subscribe(
       serviceDetails => {
-        this.serviceDetails = serviceDetails
-        this.latencyData = this.parseArrayObjectsForCharting(this.serviceDetails.status.lastHour.latency.list, 't', 'l');
-        this.latencySeries = this.latencyData.data;
-        this.timeSeries = this.latencyData.time;
-
-        this.labels = this.timeSeries;
-
-        this.datasets = [
-          {
-            label: "Latency(ms) Last Hour",
-            data: this.latencySeries
-          }
-        ];
-        console.log('datasets: ', this.datasets);
+        console.log('Inside getServicresDetails');
+        this.serviceDetails = serviceDetails;
+        this.getLatencyData(0);
       },
       error => this.errorMessage = <any>error
       );
@@ -85,3 +182,4 @@ export class DetailsComponent {
     return { time: time, data: latency };
   }
 }
+
