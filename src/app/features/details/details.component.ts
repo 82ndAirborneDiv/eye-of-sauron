@@ -29,8 +29,6 @@ export class DetailsComponent {
   private twoFour = 1;
   private week = 2;
 
-  // serviceId = 'HkZ9-FVOZ';
-
   public checkModel: any = 1;
 
   private latencyData;
@@ -54,6 +52,10 @@ export class DetailsComponent {
     pointHoverBackgroundColor: '#fff',
     pointHoverBorderColor: 'rgba(148,159,177,0.8)'
   }];
+
+  private lastOutage;
+  private lastOutageDuration;
+  private hasOutage = false;
 
   private options = {
     scales: {
@@ -105,19 +107,19 @@ export class DetailsComponent {
     if (this.serviceDetails) {
       switch (option) {
         case 0:
-          this.latencyData = this.parseArrayObjectsForCharting(this.serviceDetails.status.lastHour.latency.list.reverse(), 't', 'l');
+          this.latencyData = this.parseArrayObjectsForCharting(this.serviceDetails.status.lastHour.latency.list, 't', 'l');
           this.twoFourHoursActive = '';
           this.hourActive = 'active';
           this.weekActive = '';
           break;
         case 2:
-          this.latencyData = this.parseArrayObjectsForCharting(this.serviceDetails.status.lastWeek.latency.list.reverse(), 't', 'l');
+          this.latencyData = this.parseArrayObjectsForCharting(this.serviceDetails.status.lastWeek.latency.list, 't', 'l');
           this.twoFourHoursActive = '';
           this.hourActive = '';
           this.weekActive = 'active';
           break;
         default:
-          this.latencyData = this.parseArrayObjectsForCharting(this.serviceDetails.status.last24Hours.latency.list.reverse(), 't', 'l');
+          this.latencyData = this.parseArrayObjectsForCharting(this.serviceDetails.status.last24Hours.latency.list, 't', 'l');
           this.twoFourHoursActive = 'active';
           this.hourActive = '';
           this.weekActive = '';
@@ -126,14 +128,12 @@ export class DetailsComponent {
       this.latencySeries = this.latencyData.data;
       this.timeSeries = this.latencyData.time;
 
-      this.labels = this.timeSeries;
-
-      console.log('Labels: ', this.labels)
+      this.labels = this.timeSeries.reverse();
 
       this.datasets = [
         {
           label: "Latency in ms",
-          data: this.latencySeries,
+          data: this.latencySeries.reverse(),
           pointBorderColor: 'blue',
           borderColor: 'blue'
         }
@@ -143,8 +143,8 @@ export class DetailsComponent {
   }
 
   reloadChart() {
-    console.log('reloadChart fires');
-    console.log('chart: ', this.chart);
+    // console.log('reloadChart fires');
+    // console.log('chart: ', this.chart);
     if (this.chart !== undefined) {
       this.chart.chart.destroy();
       this.chart.chart = 0;
@@ -156,19 +156,28 @@ export class DetailsComponent {
   }
 
   getServicesDetails(id): void {
-
-    let status;
-    let last24Hours;
+    let lastElement;
 
     this._serviceService.getServiceDetails(id)
       .subscribe(
       serviceDetails => {
-        console.log('Inside getServicresDetails');
+        console.log('Service Details: ', serviceDetails);
         this.serviceDetails = serviceDetails;
+        if (serviceDetails.status.latestOutages.length > 0) {
+          this.hasOutage = true;
+          this.lastOutage = serviceDetails.status.latestOutages[serviceDetails.status.latestOutages.length - 1];
+          this.lastOutageDuration = this.millisToMinutesAndSeconds(serviceDetails.status.latestOutages[serviceDetails.status.latestOutages.length - 1].downtime);
+        }
         this.getLatencyData(0);
       },
       error => this.errorMessage = <any>error
       );
+  }
+
+  millisToMinutesAndSeconds(millis) {
+    let minutes = Math.floor(millis / 60000);
+    let seconds = ((millis % 60000) / 1000).toFixed(0);
+    return minutes + ":" + seconds;
   }
 
 

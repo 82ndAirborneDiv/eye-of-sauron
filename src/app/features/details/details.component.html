@@ -1,19 +1,28 @@
 <section>
   <div class="widget" *ngIf="serviceDetails">
     <div class="widget-header">
-      <h4><a href="{{serviceDetails.service.url}}" target="_blank">{{serviceDetails.service.name}}</a></h4>
+      <!-- <h4></h4> -->
+      <h4>Service Details</h4>
     </div>
     <div class="widget-body">
       <div class="row">
         <div class="col-md-6 col-sm-6">
-          <div class="detaild-table">
-            <!-- <label>ID</label>: {{serviceDetails.service.id}} -->
-            <label>Uptime</label>: {{serviceDetails.status.upsince}}
-            <label></label>
-          </div>
+
+          <label>Name</label>: {{serviceDetails.service.name}} (<a href="{{serviceDetails.service.url}}" target="_blank">{{serviceDetails.service.url}}</a>)
+
         </div>
         <div class="col-md-6 col-sm-6">
+          <label>Host</label>: {{serviceDetails.service.host}}
+        </div>
+      </div>
+      <div class="row" *ngIf="hasOutage">
+        <div class="col-md-6 col-sm-6">
 
+          <label>Last Outage</label>: {{lastOutage.timestamp | date:'medium'}}
+
+        </div>
+        <div class="col-md-6 col-sm-6">
+          <label>Outage Duration</label>: {{lastOutageDuration}} (minutes:seconds)
         </div>
       </div>
       <div class="row">

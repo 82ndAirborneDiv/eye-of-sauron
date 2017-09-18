@@ -16,7 +16,7 @@
           </div>
           <div *ngIf=" report.status.last24Hours.numberOutages>= 1" class="widget-body widget-warn">
             <div class='center'>
-              <h4 class='truncate'><i class='fa fa-arrow-up'></i><a routerLink="/details/{{report.service.id}}" target="_blank">{{report.service.name}}</a></h4>
+              <h4 class='truncate'><i class='fa fa-arrow-up'></i><a routerLink="/details/{{report.service.id}}"> {{report.service.name}}</a></h4>
               <div class='clearfix'>Host: {{report.service.host}}</div>
               <div class='clearfix'>Uptime: {{report.status.upsince}}</div>
             </div>
@@ -25,7 +25,7 @@
         <div *ngIf='report.status.currentOutage.currentOutage' class='widget'>
           <div class='widget-body widget-danger'>
             <div class='center'>
-              <h4 class='truncate'><i class='fa fa-exclamation-triangle fa-lg'></i> <a routerLink="/details/{{report.service.id}}" target="_blank">{{report.service.name}}</a></h4>
+              <h4 class='truncate'><i class='fa fa-exclamation-triangle fa-lg'></i><a routerLink="/details/{{report.service.id}}"> {{report.service.name}}</a></h4>
               <div class='clearfix'>Host: {{report.service.host}}</div>
               <div class='clearfix truncate'>Down: {{report.status.currentOutage.outageDuration}}</div>
             </div>
