@@ -15,6 +15,9 @@ function exit(code) {
   storage.quit();
   process.exit(code);
 }
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
+
+
 
 program
   .option('-e, --env [env]', 'Storage environment key', process.env.NODE_ENV || 'development')
