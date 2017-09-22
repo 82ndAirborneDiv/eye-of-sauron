@@ -71,6 +71,14 @@ export class DetailsComponent {
       xAxes: [{
         ticks: {
           fontColor: 'white'
+        },
+        type: 'time',
+        distribution: 'series',
+        time: {
+          displayFormats: {
+            minute: 'MM/DD, h:mm a',
+            hour: 'MM/DD, h:mm a'
+          }
         }
       }]
     },
