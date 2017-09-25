@@ -70,7 +70,9 @@ export class DetailsComponent {
       }],
       xAxes: [{
         ticks: {
-          fontColor: 'white'
+          fontColor: 'white',
+          minRotation: 90,
+          maxRotation: 90
         },
         type: 'time',
         distribution: 'series',
