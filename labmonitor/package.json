@@ -24,7 +24,7 @@
     "nodemailer-ses-transport": "^1.5.0",
     "path": "^0.12.7",
     "redis": "^2.6.3",
-    "shortid": "^2.2.6",
+    "shortid": "^2.2.16",
     "stream-spigot": "^3.0.5",
     "timestream-aggregates": "^0.1.7",
     "util": "^0.10.3",
