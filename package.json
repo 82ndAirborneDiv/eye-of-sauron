@@ -71,9 +71,9 @@
   },
   "dependencies": {
     "@angular/common": "2.2.0-rc.0",
-    "@angular/compiler": "2.2.0-rc.0",
+    "@angular/compiler": "19.2.18",
     "@angular/compiler-cli": "2.2.0-rc.0",
-    "@angular/core": "2.2.0-rc.0",
+    "@angular/core": "19.2.18",
     "@angular/forms": "2.2.0-rc.0",
     "@angular/http": "2.2.0-rc.0",
     "@angular/platform-browser": "2.2.0-rc.0",
